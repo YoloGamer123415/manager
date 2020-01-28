@@ -1,6 +1,6 @@
 <template>
     <div id="Mail">
-        
+        <p>Mail</p>
     </div>
 </template>
 

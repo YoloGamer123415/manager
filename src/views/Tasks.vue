@@ -1,17 +1,17 @@
 <template>
-    <div id="Todo">
-        
+    <div id="Tasks">
+        <p>Tasks</p>
     </div>
 </template>
 
 <script>
 export default {
-    name: "Todo"
+    name: "Tasks"
 }
 </script>
 
 <style lang="scss" scoped>
-div#Todo {
+div#Tasks {
     
 }
 </style>

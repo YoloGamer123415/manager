@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from "@/views/Home";
+import Home from "../views/Home";
+import Agenda from "../views/Agenda";
+import Mail from "../views/Mail";
+import Tasks from "../views/Tasks";
+import New from "../views/New";
 
 Vue.use(VueRouter);
 
@@ -19,6 +23,38 @@ const routes = [
         component: Home,
         meta: {
             title: 'Home - Manager'
+        }
+    },
+    {
+        path: '/agenda/',
+        name: 'agenda',
+        component: Agenda,
+        meta: {
+            title: 'Agenda - Manager'
+        }
+    },
+    {
+        path: '/agenda/new/',
+        name: 'new',
+        component: New,
+        meta: {
+            title: 'New appointment - Manager'
+        }
+    },
+    {
+        path: '/mail/',
+        name: 'mail',
+        component: Mail,
+        meta: {
+            title: 'Mail - Manager'
+        }
+    },
+    {
+        path: '/tasks/',
+        name: 'tasks',
+        component: Tasks,
+        meta: {
+            title: 'Tasks - Manager'
         }
     }
 ];

@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <div class="clock"></div>
+        <Clock />
         
         <div class="side"></div>
         
@@ -12,23 +12,26 @@
 
 <script>
 import Navigation from "@/components/Navigation";
+import Clock from "@/components/Clock/Index";
 
 export default {
     name: 'app',
     components: {
+        Clock,
         Navigation
     }
 }
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Raleway|Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab&display=swap');
 
 $gap: 1em;
+$main-color: #00E6E6;
 $dark-color: #252525;
 
 * {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     line-height: 1.4;
     margin: 0;
     padding: 0;
@@ -55,10 +58,10 @@ html, body {
     
     @media only screen and (min-width: 1200px) {
         grid-template:
-            'clock view' 1fr
-            'side view' 2fr
-            'navigation view' auto
-            / .25fr .75fr;
+                'clock view' 1fr
+                'side view' 2fr
+                'navigation view' auto
+        / .25fr .75fr;
     }
     
     .clock {
