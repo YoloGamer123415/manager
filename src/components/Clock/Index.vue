@@ -2,13 +2,16 @@
     <div id="Clock">
         <div class="time" v-html="time" />
         
-        <div class="busy">
-        
+        <div class="busy-bars" ref="busyBars">
+
         </div>
     </div>
 </template>
 
 <script>
+import Vue from "vue";
+import BusyBarWrapper from "./BusyBarWrapper";
+
 export default {
     name: "Clock",
     data() {
@@ -20,6 +23,25 @@ export default {
         setInterval(() => {
             this.time = this.formatTime(new Date());
         }, 500);
+
+        const ELEMENT = Vue.extend(BusyBarWrapper);
+        const DAYS = [ 'Z', 'M', 'D', 'W', 'D', 'V', 'Z' ];
+        const busyBars = this.$refs.busyBars;
+        const today = new Date().getDay();
+
+        for (let i = 0; i < 7; i++) {
+            let day = (today - 1) % 7;
+
+            let instance = new ELEMENT({
+                propsData: {
+                    size: 0,
+                    isToday: i === 0,
+                    day: DAYS[day]
+                }
+            });
+            instance.$mount();
+            busyBars.appendChild(instance.$el);
+        }
     },
     methods: {
         /**

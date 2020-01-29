@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <Clock />
-        
+
         <div class="side"></div>
         
         <Navigation class="navigation" />
@@ -12,7 +12,7 @@
 
 <script>
 import Navigation from "@/components/Navigation";
-import Clock from "@/components/Clock/Index";
+import Clock from "./components/Clock/Index";
 
 export default {
     name: 'app',
