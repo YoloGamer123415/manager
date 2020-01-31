@@ -1,0 +1,105 @@
+{
+    "loading": "Bezig met laden",
+    "days": {
+        "sunday": {
+            "letter": "Z",
+            "short": "Zo",
+            "long": "Zondag"
+        },
+        "monday": {
+            "letter": "M",
+            "short": "Ma",
+            "long": "Maandag"
+        },
+        "tuesday": {
+            "letter": "D",
+            "short": "Di",
+            "long": "Dinsdag"
+        },
+        "wednesday": {
+            "letter": "W",
+            "short": "Woe",
+            "long": "Woensdag"
+        },
+        "thursday": {
+            "letter": "D",
+            "short": "Do",
+            "long": "Donderdag"
+        },
+        "friday": {
+            "letter": "V",
+            "short": "Vrij",
+            "long": "Vrijdag"
+        },
+        "saturday": {
+            "letter": "Z",
+            "short": "Za",
+            "long": "Zaterdag"
+        }
+    },
+    "months": {
+        "january": {
+            "short": "jan",
+            "long": "januari"
+        },
+        "february": {
+            "short": "feb",
+            "long": "februari"
+        },
+        "march": {
+            "short": "mar",
+            "long": "maart"
+        },
+        "april": {
+            "short": "apr",
+            "long": "april"
+        },
+        "may": {
+            "short": "mei",
+            "long": "mei"
+        },
+        "june": {
+            "short": "jun",
+            "long": "juni"
+        },
+        "july": {
+            "short": "jul",
+            "long": "juli"
+        },
+        "august": {
+            "short": "aug",
+            "long": "augustus"
+        },
+        "september": {
+            "short": "sep",
+            "long": "september"
+        },
+        "october": {
+            "short": "okt",
+            "long": "oktober"
+        },
+        "november": {
+            "short": "nov",
+            "long": "november"
+        },
+        "december": {
+            "short": "dec",
+            "long": "december"
+        }
+    },
+    "navigation": {
+        "home": "Home",
+        "agenda": "Agenda",
+        "mail": "Mail",
+        "tasks": "Taken",
+        "settings": "Instellingen"
+    },
+    "time": {
+        "day": "{day} {dayN} {month} {year}",
+        "time": "{hours}:{minutes}:{seconds}"
+    },
+    "settings": {
+        "title": "Instellingen",
+        "language": "Taal"
+    }
+}

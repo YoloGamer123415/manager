@@ -3,6 +3,7 @@
         <div
             class="inner-bar"
             :class="{ today: isToday }"
+            :style="{ height: `${height}%` }"
             ref="innerBar" />
     </div>
 </template>
@@ -11,19 +12,27 @@
 export default {
     name: "BusyBar",
     props: {
-        size: Number,
+        hours: Number,
         isToday: Boolean
+    },
+    methods: {
+        setHours(hours) {
+            if (hours < 0)
+                hours = 0;
+            else if (hours > 24)
+                hours = 24;
+            
+            this.height = (hours / 24) * 100;
+        }
     },
     data() {
         return {
-            height: 1
+            height: ((this.hours || 0) / 24) * 100
         }
     },
     mounted() {
         setInterval(() => {
-            this.height = Math.round(Math.random() * 100) + 1;
-            
-            this.$refs.innerBar.style.height = `${this.height}%`;
+            this.setHours(Math.floor(Math.random() * 24 + 1));
         }, 1000);
     }
 }

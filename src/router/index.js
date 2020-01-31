@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from "../views/Home";
-import Agenda from "../views/Agenda";
-import Mail from "../views/Mail";
-import Tasks from "../views/Tasks";
-import New from "../views/New";
+import Home from "@/views/Home";
+import Agenda from "@/views/Agenda";
+import Mail from "@/views/Mail";
+import Tasks from "@/views/Tasks";
+import New from "@/views/New";
+import Settings from "@/views/Settings";
+// import Test from "@/views/Test";
 
 Vue.use(VueRouter);
 
@@ -17,6 +19,14 @@ const routes = [
             title: 'Redirect - Manager'
         }
     },
+    // {
+    //     path: '/',
+    //     name: 'Test',
+    //     component: Test,
+    //     meta: {
+    //         title: 'Test - Manager'
+    //     }
+    // },
     {
         path: '/home/',
         name: 'home',
@@ -55,6 +65,14 @@ const routes = [
         component: Tasks,
         meta: {
             title: 'Tasks - Manager'
+        }
+    },
+    {
+        path: '/settings/',
+        name: 'settings',
+        component: Settings,
+        meta: {
+            title: 'Settings - Manager'
         }
     }
 ];

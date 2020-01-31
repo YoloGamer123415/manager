@@ -19,6 +19,15 @@ export default {
     components: {
         Clock,
         Navigation
+    },
+    mounted() {
+        if (!this.$ls.get('language')) {
+            this.$ls.set('language', this.$i18n.locale);
+        }
+        
+        this.$ls.on('language', newLang => {
+            this.$i18n.locale = newLang;
+        })
     }
 }
 </script>
@@ -51,10 +60,21 @@ html, body {
 
 #app {
     display: grid;
+    grid-template:
+        'clock' 1fr
+        'side' 2fr
+        'navigation' auto
+        / 1fr;
+    gap: $gap;
     width: calc(100% - 2 * #{$gap});
     height: calc(100% - 2 * #{$gap});
     padding: $gap;
-    gap: $gap;
+    
+    @media only screen and (max-width: 1199px) {
+        .view {
+            display: none;
+        }
+    }
     
     @media only screen and (min-width: 1200px) {
         grid-template:
@@ -66,8 +86,6 @@ html, body {
     
     .clock {
         grid-area: clock;
-        
-        background-color: purple;
     }
     
     .side {
@@ -82,7 +100,6 @@ html, body {
     
     .view {
         grid-area: view;
-        background-color: blue;
     }
 }
 </style>

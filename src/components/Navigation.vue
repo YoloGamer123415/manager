@@ -6,7 +6,7 @@
             </div>
         
             <div class="text">
-                <span>Home</span>
+                <span v-text="$t('navigation.home')" />
             </div>
         </router-link>
     
@@ -16,7 +16,7 @@
             </div>
         
             <div class="text">
-                <span>Agenda</span>
+                <span v-text="$t('navigation.agenda')" />
             </div>
         </router-link>
     
@@ -26,7 +26,7 @@
             </div>
         
             <div class="text">
-                <span>Mail</span>
+                <span v-text="$t('navigation.mail')" />
             </div>
         </router-link>
     
@@ -36,7 +36,17 @@
             </div>
         
             <div class="text">
-                <span>Tasks</span>
+                <span v-text="$t('navigation.tasks')" />
+            </div>
+        </router-link>
+        
+        <router-link to="/settings" class="link settings">
+            <div class="icon">
+                <font-awesome-icon icon="cog" />
+            </div>
+            
+            <div class="text">
+                <span v-text="$t('navigation.settings')" />
             </div>
         </router-link>
     </div>
@@ -81,7 +91,7 @@ div#Navigation {
             
             // TODO: blijft dit 1200px?
             @media only screen and (min-width: 1200px) {
-                width: $width * 3;
+                width: $width * 3.25;
                 overflow: visible;
             }
         }
@@ -100,6 +110,10 @@ div#Navigation {
         
         &.tasks {
             background-color: #F5BA15;
+        }
+        
+        &.settings {
+            background-color: #00E6E6;
         }
         
         div.icon {

@@ -1,20 +1,21 @@
 <template>
     <div id="BusyBarWrapper">
         <div class="bar">
-            <BusyBar :size="size" :is-today="isToday" />
+            <BusyBar :hours="hours" :is-today="isToday" />
         </div>
 
-        <div class="day" v-text="day" />
+        <div class="day" v-text="$t(day)" />
     </div>
 </template>
 
 <script>
 import BusyBar from "./BusyBar";
+
 export default {
     name: "BusyBarWrapper",
     components: {BusyBar},
     props: {
-        size: Number,
+        hours: Number,
         isToday: Boolean,
         day: String
     }
@@ -22,14 +23,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div#BusyBarWrapper {
-    grid-template:
-        'bar' auto
-        'day' 3em
-        / 1fr;
+$bar-height: 2em;
 
+div#BusyBarWrapper {
+    display: grid;
+    grid-template:
+        'bar' auto //calc(100% - #{$bar-height})
+        'day' #{$bar-height}
+        / 1fr;
+    float: left;
+    height: 100%;
+    
     &:not(:first-of-type) {
-        margin-left: 1em;
+        margin-left: 1.5em;
     }
 
     div.bar {
@@ -38,6 +44,9 @@ div#BusyBarWrapper {
 
     div.day {
         grid-area: day;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
     }
 }
 </style>

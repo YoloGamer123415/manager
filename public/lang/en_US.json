@@ -1,0 +1,105 @@
+{
+    "loading": "Loading",
+    "days": {
+        "sunday": {
+            "letter": "S",
+            "short": "Sun",
+            "long": "Sunday"
+        },
+        "monday": {
+            "letter": "M",
+            "short": "Mon",
+            "long": "Monday"
+        },
+        "tuesday": {
+            "letter": "T",
+            "short": "Tue",
+            "long": "Tuesday"
+        },
+        "wednesday": {
+            "letter": "W",
+            "short": "Wed",
+            "long": "Wednesday"
+        },
+        "thursday": {
+            "letter": "T",
+            "short": "Thu",
+            "long": "Thursday"
+        },
+        "friday": {
+            "letter": "F",
+            "short": "Fri",
+            "long": "Friday"
+        },
+        "saturday": {
+            "letter": "S",
+            "short": "Sat",
+            "long": "Saturday"
+        }
+    },
+    "months": {
+        "january": {
+            "short": "Jan",
+            "long": "January"
+        },
+        "february": {
+            "short": "Feb",
+            "long": "February"
+        },
+        "march": {
+            "short": "Mar",
+            "long": "March"
+        },
+        "april": {
+            "short": "Apr",
+            "long": "April"
+        },
+        "may": {
+            "short": "May",
+            "long": "May"
+        },
+        "june": {
+            "short": "Jun",
+            "long": "June"
+        },
+        "july": {
+            "short": "Jul",
+            "long": "July"
+        },
+        "august": {
+            "short": "Aug",
+            "long": "August"
+        },
+        "september": {
+            "short": "Sep",
+            "long": "September"
+        },
+        "october": {
+            "short": "Oct",
+            "long": "October"
+        },
+        "november": {
+            "short": "Nov",
+            "long": "November"
+        },
+        "december": {
+            "short": "Dec",
+            "long": "December"
+        }
+    },
+    "navigation": {
+        "home": "Home",
+        "agenda": "Agenda",
+        "mail": "Mail",
+        "tasks": "Tasks",
+        "settings": "Settings"
+    },
+    "time": {
+        "day": "{day} {month} {dayN}, {year}",
+        "time": "{hours}:{minutes}:{seconds}"
+    },
+    "settings": {
+        "title": "Settings",
+        "language": "Language"
+    }
+}
