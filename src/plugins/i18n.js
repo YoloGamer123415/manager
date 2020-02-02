@@ -11,15 +11,14 @@ let allLangObj = {
 
 Vue.use(VueI18n);
 
+const language = window.localStorage.getItem('manager__language');
+
 const i18n = new VueI18n({
-    locale: window.localStorage.getItem('manager__language')
-        ? JSON.parse(window.localStorage.getItem('manager__language')).value
+    locale: language
+        ? JSON.parse(language).value
         : languages.default
     ,
-    fallbackLocale: window.localStorage.getItem('manager__language')
-        ? JSON.parse(window.localStorage.getItem('manager__language')).value
-        : languages.default
-    ,
+    fallbackLocale: 'en',
     messages: allLangObj
 });
 

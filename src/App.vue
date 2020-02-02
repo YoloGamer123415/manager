@@ -1,6 +1,10 @@
 <template>
-    <div id="app">
-        <Clock />
+    <div
+        id="app"
+        ref="app"
+        :class="{ isHome: $route.name === 'home' }"
+    >
+        <Clock class="clock" />
 
         <div class="side"></div>
         
@@ -39,6 +43,16 @@ $gap: 1em;
 $main-color: #00E6E6;
 $dark-color: #252525;
 
+:root {
+    --main-color: #{$main-color};
+    --theme-light-text: #{$dark-color};
+    --theme-light-background: #ffffff;
+    --theme-dark-text: #ffffff;
+    --theme-dark-background: #{$dark-color};
+    --current-theme-text: var(--theme-dark-text);
+    --current-theme-background: var(--theme-dark-background);
+}
+
 * {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.4;
@@ -55,32 +69,49 @@ $dark-color: #252525;
 html, body {
     width: 100vw;
     height: 100vh;
-    background-color: $dark-color;
+    background-color: var(--current-theme-background);
+    transition: background-color .3s ease;
 }
 
 #app {
     display: grid;
-    grid-template:
-        'clock' 1fr
-        'side' 2fr
-        'navigation' auto
-        / 1fr;
+    
     gap: $gap;
     width: calc(100% - 2 * #{$gap});
     height: calc(100% - 2 * #{$gap});
     padding: $gap;
     
     @media only screen and (max-width: 1199px) {
-        .view {
+        &.isHome {
+            grid-template:
+                'clock' 1fr
+                'side' 2fr
+                'navigation' auto
+                / 1fr;
+        }
+        
+        &:not(.isHome) {
+            grid-template:
+                'view' 1fr
+                'navigation' auto
+                / 1fr;
+        }
+        
+        &.isHome .view {
+            display: none;
+        }
+        
+        &:not(.isHome) .clock,
+        &:not(.isHome) .side {
             display: none;
         }
     }
     
     @media only screen and (min-width: 1200px) {
         grid-template:
-                'clock view' 1fr
-                'side view' 2fr
-                'navigation view' auto
+            'clock view' 1fr
+            'side view' 2fr
+            'navigation view' auto
         / .25fr .75fr;
     }
     

@@ -1,5 +1,8 @@
 <template>
-    <div id="BusyBar">
+    <div
+        id="BusyBar"
+        :style="{ 'background-color': $theme.current === 'light' ? '#252525' : '#000000' }"
+    >
         <div
             class="inner-bar"
             :class="{ today: isToday }"
@@ -40,7 +43,6 @@ export default {
 
 <style lang="scss" scoped>
 $width: .3em;
-$main-color: #00E6E6;
 
 div#BusyBar {
     display: flex;
@@ -49,7 +51,6 @@ div#BusyBar {
     width: $width;
     height: calc(100% - 2 * #{$width});
     padding: $width;
-    background-color: #000000;
     border-radius: 100px;
     
     &:not(:first-of-type) {
@@ -59,7 +60,7 @@ div#BusyBar {
     div.inner-bar {
         width: $width;
         height: $width;
-        background-color: $main-color;
+        background-color: var(--main-color);
         border-radius: 100px;
         transition: height .2s ease;
     }

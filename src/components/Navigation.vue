@@ -97,7 +97,7 @@ div#Navigation {
         }
         
         &.home {
-            background-color: #00E6E6;
+            background-color: var(--main-color);
         }
         
         &.agenda {
@@ -113,7 +113,7 @@ div#Navigation {
         }
         
         &.settings {
-            background-color: #00E6E6;
+            background-color: var(--main-color);
         }
         
         div.icon {

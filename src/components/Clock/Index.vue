@@ -110,7 +110,7 @@ div#Clock {
         'time' #{$font-size * 4}
         'bars' auto
         / 1fr;
-    color: #ffffff;
+    color: var(--current-theme-text);
     
     div.time {
         grid-area: time;
