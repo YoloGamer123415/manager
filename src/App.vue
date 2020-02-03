@@ -45,6 +45,7 @@ $dark-color: #252525;
 
 :root {
     --main-color: #{$main-color};
+    --inactive-color: #aaaaaa;
     --theme-light-text: #{$dark-color};
     --theme-light-background: #ffffff;
     --theme-dark-text: #ffffff;

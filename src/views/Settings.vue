@@ -5,7 +5,7 @@
         <div class="setting language">
             <label for="language">{{ $t('settings.language') }}:</label>
             <select id="language" v-model="selectedLanguage">
-                <option v-for="lang in languages.all" :key="lang" :value="lang">
+                <option v-for="lang in languages" :key="lang" :value="lang">
                     {{ lang }}
                 </option>
             </select>
@@ -28,6 +28,12 @@
             
             <label for="fullscreen">{{ $t('settings.fullscreen') }}:</label>
             <input type="checkbox" id="fullscreen" v-model="fullscreen">
+            
+            <br>
+            <br>
+            <br>
+            
+            <router-link to="/">Test page</router-link>
         </div>
     </div>
 </template>
@@ -40,7 +46,7 @@ export default {
     name: "Settings",
     data() {
         return {
-            languages,
+            languages: languages.all.sort(),
             selectedLanguage: this.$i18n.locale,
             selectedTheme: this.$theme.current,
             mainColor: this.$theme.mainColor,
@@ -62,14 +68,8 @@ export default {
             this.$ls.set('main-color', newColor);
         },
         fullscreen: function (isFullscreen) {
-            // eslint-disable-next-line no-console
-            console.log(isFullscreen);
             this.$fullscreen.toggle(true, isFullscreen);
         }
-    },
-    mounted() {
-        // eslint-disable-next-line no-console
-        console.log(this.$fullscreen.isFullscreen);
     }
 }
 </script>

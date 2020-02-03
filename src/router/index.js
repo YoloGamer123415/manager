@@ -6,27 +6,27 @@ import Mail from "@/views/Mail";
 import Tasks from "@/views/Tasks";
 import New from "@/views/New";
 import Settings from "@/views/Settings";
-// import Test from "@/views/Test";
+import Test from "@/views/Test";
 
 Vue.use(VueRouter);
 
 const routes = [
-    {// TODO: laten we dit zo?
-        path: '/',
-        name: 'redirect',
-        redirect: '/home/',
-        meta: {
-            title: 'Redirect - Manager'
-        }
-    },
-    // {
+    // {// TODO: laten we dit zo?
     //     path: '/',
-    //     name: 'Test',
-    //     component: Test,
+    //     name: 'redirect',
+    //     redirect: '/home/',
     //     meta: {
-    //         title: 'Test - Manager'
+    //         title: 'Redirect - Manager'
     //     }
     // },
+    {
+        path: '/',
+        name: 'Test',
+        component: Test,
+        meta: {
+            title: 'Test - Manager'
+        }
+    },
     {
         path: '/home/',
         name: 'home',
