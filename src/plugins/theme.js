@@ -30,7 +30,8 @@ export default {
         });
         const cycle = [
             'background',
-            'text'
+            'text',
+            'scrollbar'
         ];
         const root = document.documentElement;
 

@@ -25,7 +25,6 @@
 
 <script>
     import Vue from "vue";
-    import { TimelineLite } from "gsap";
     import Option from "./Option";
     import i18n from "@/plugins/i18n";
 
@@ -33,42 +32,30 @@
         name: "Select",
         data() {
             return {
+                options: [],
                 selected: {
                     text: null,
                     value: null
                 },
                 isSelecting: false,
-                timeline: new TimelineLite({ paused: true })
             }
         },
         mounted() {
             const OPTION = Vue.extend(Option);
             // const realSelect = this.$refs.realSelect;
-            const options = this.$refs.options;
             const fakeSelect = this.$refs.fakeSelect;
             const selectOptions = this.$refs.options;
-            let options = [];
-
-            this.timeline.fromTo(
-                options,
-                1,
-                {
-
-                }, {
-
-                }
-            );
 
             this.selected.text = this.$refs.fakeSelect.options[ this.$refs.fakeSelect.selectedIndex ].text;
             this.selected.value = this.$refs.fakeSelect.options[ this.$refs.fakeSelect.selectedIndex ].value;
 
             for (let i = 0; i < fakeSelect.options.length; i++)
-                options.push({
+                this.options.push({
                     value: fakeSelect.options[i].value,
                     text: fakeSelect.options[i].text
                 });
 
-            options.forEach(option => {
+            this.options.forEach(option => {
                 let instance = new OPTION({
                     i18n,
                     propsData: {
@@ -83,47 +70,68 @@
             });
         },
         methods: {
-            selectedClick: function() {
-                // eslint-disable-next-line no-console
-                console.log("Selected click");
-
+            selectedClick: function () {
                 this.isSelecting = !this.isSelecting;
             },
             optionClick: function (option) {
-                // eslint-disable-next-line no-console
-                console.log(`Option ${option} click`);
+                this.isSelecting = !this.isSelecting;
+                let selectionIndex = this.findSelectedIndex(option);
+
+                if (selectionIndex >= 0) {
+                    this.$refs.fakeSelect.selectedIndex = selectionIndex;
+                    this.selected = option;
+                }
+            },
+            findSelectedIndex: function (option) {
+                let index = -1;
+                
+                this.options.forEach((opt, i) => {
+                    if (opt.text === option.text && opt.value === option.value)
+                        index = i;
+                });
+                
+                return index;
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
+    $padding: .5em;
+    $border: 2px;
+    $height: 2 * $padding + 1.2em; // about one option
     $time: 3s;
 
     div.Select {
+        width: fit-content;
+        min-width: 300px;
+    
         div.real-select {
+            position: relative;
+            width: calc(100% - 2 * #{$padding * 2});
+            padding: #{$padding} #{$padding * 2};
+            background-color: var(--current-theme-background);
+            border: $border solid var(--main-color);
+            border-radius: 5px;
             cursor: pointer;
 
-            background-color: blue;
-
-            div.selected {
-
-
-                &.isOpen + div.options {
-                    max-height: fit-content;
-                    padding: 0 1em;
-                }
+            div.selected.isOpen + div.options {
+                height: fit-content;
+                z-index: 100;
             }
 
             div.options {
-                max-height: 0;
-                padding: 0 1em;
-                overflow: hidden;
-                transition:
-                    max-height #{$time} ease,
-                    padding #{$time} ease;
-
-                background-color: green;
+                position: absolute;
+                top: -$border;
+                left: -$border;
+                width: calc(100% + 2 * #{$border});
+                height: 0;
+                max-height: 6 * $height;
+                border: 2px solid var(--main-color);
+                border-radius: 5px;
+                box-shadow: 1px 3px 5px 0 rgba($color: #000000, $alpha: .25);
+                overflow: auto;
+                z-index: -1;
             }
         }
 

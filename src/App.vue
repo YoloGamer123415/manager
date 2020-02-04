@@ -46,12 +46,33 @@ $dark-color: #252525;
 :root {
     --main-color: #{$main-color};
     --inactive-color: #aaaaaa;
+    
     --theme-light-text: #{$dark-color};
     --theme-light-background: #ffffff;
+    --theme-light-scrollbar: #bbbbbb;
+    
     --theme-dark-text: #ffffff;
     --theme-dark-background: #{$dark-color};
+    --theme-dark-scrollbar: #444444;
+    
     --current-theme-text: var(--theme-dark-text);
     --current-theme-background: var(--theme-dark-background);
+    --current-theme-scrollbar: var(--theme-dark-scrollbar);
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    background-color: var(--current-theme-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--current-theme-scrollbar);
+    border-radius: 100px;
+}
+
+::-webkit-scrollbar-corner {
+    display: none;
 }
 
 * {

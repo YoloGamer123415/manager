@@ -15,7 +15,26 @@
             <option value="optie-3">Optie 3</option>
             <option value="optie-4">Optie 4</option>
             <option value="optie-5">Optie 5</option>
+            <!--<option value="optie-6">Optie 6</option>
             <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>
+            <option value="optie-6">Optie 6</option>-->
         </Select>
     </div>
 </template>
