@@ -47,12 +47,14 @@ export default {
 <style lang="scss" scoped>
 $border: 2px;
 $font: .75em;
+$padding: .25em;
+$time: .2s;
 
 div.Input {
     position: relative;
-    width: fit-content;
+    min-width: 300px;
     height: fit-content;
-    
+
     label {
         position: absolute;
         top: $border;
@@ -61,18 +63,18 @@ div.Input {
         align-items: center;
         max-width: calc(100% - 2 * (1em + #{$border}));
         max-height: calc(100% - 2 * (.5em + #{$border}));
-        padding: .5em 1em;
+        padding: #{$padding} #{$padding * 2};
         border-radius: 5px;
         background-color: var(--current-theme-background);
         font-size: 1em;
         cursor: text;
         overflow: hidden;
         transition:
-            width .3s ease,
-            height .3s ease,
-            top .3s ease,
-            padding .3s ease,
-            font-size .3s ease;
+            width #{$time} ease,
+            height #{$time} ease,
+            top #{$time} ease,
+            padding #{$time} ease,
+            font-size #{$time} ease;
         
         &.required::after {
             content: '*';
@@ -83,14 +85,15 @@ div.Input {
     
     input {
         -webkit-appearance: none;
-        padding: .5em 1em;
+        width: calc(100% - 2 * (1em + #{$border}));
+        padding: #{$padding} #{$padding * 2};
         background-color: transparent;
-        border: $border solid var(--inactive-color);
-        border-radius: 5px;
+        border: none;
+        border-bottom: $border solid var(--inactive-color);
         color: var(--current-theme-text);
         font-size: 16px;
         outline: none;
-        transition: border-color .3s ease;
+        transition: border-color #{$time} ease;
         
         &:focus {
             border-color: var(--main-color);
@@ -106,11 +109,11 @@ div.Input {
     
         &:focus + label,
         &:not(:placeholder-shown) + label {
-            top: calc(-.5em - .5 * (.5em - #{$border}));
-            left: .5em;
+            top: -1em;
+            left: $padding;
             width: fit-content;
             height: fit-content;
-            padding: 0 .5em;
+            padding: 0 #{$padding};
             font-size: $font;
         }
     }

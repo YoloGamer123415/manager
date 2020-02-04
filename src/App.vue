@@ -113,7 +113,7 @@ html, body {
             'clock view' 1fr
             'side view' 2fr
             'navigation view' auto
-        / .25fr .75fr;
+            / .25fr .75fr;
     }
     
     .clock {
@@ -132,6 +132,10 @@ html, body {
     
     .view {
         grid-area: view;
+    }
+
+    a {
+        color: var(--main-color);
     }
 }
 </style>

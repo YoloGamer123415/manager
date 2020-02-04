@@ -22,7 +22,7 @@
 
 <script>
 // import Input from "@/components/form/Input";
-import Select from "@/components/form/Select";
+import Select from "@/components/form/Select/Index";
 
 export default {
     name: "Test",
