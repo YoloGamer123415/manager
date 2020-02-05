@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import "@/assets/style/colors.scss";
 import Navigation from "@/components/Navigation";
 import Clock from "./components/Clock/Index";
 
@@ -37,28 +38,11 @@ export default {
 </script>
 
 <style lang="scss">
+@import "assets/style/mixins";
+
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab&display=swap');
 
 $gap: 1em;
-$main-color: #00E6E6;
-$dark-color: #252525;
-
-:root {
-    --main-color: #{$main-color};
-    --inactive-color: #aaaaaa;
-    
-    --theme-light-text: #{$dark-color};
-    --theme-light-background: #ffffff;
-    --theme-light-scrollbar: #bbbbbb;
-    
-    --theme-dark-text: #ffffff;
-    --theme-dark-background: #{$dark-color};
-    --theme-dark-scrollbar: #444444;
-    
-    --current-theme-text: var(--theme-dark-text);
-    --current-theme-background: var(--theme-dark-background);
-    --current-theme-scrollbar: var(--theme-dark-scrollbar);
-}
 
 ::-webkit-scrollbar {
     width: 7px;
@@ -103,20 +87,20 @@ html, body {
     height: calc(100% - 2 * #{$gap});
     padding: $gap;
     
-    @media only screen and (max-width: 1199px) {
+    @include phone {
         &.isHome {
             grid-template:
                 'clock' 1fr
                 'side' 2fr
                 'navigation' auto
-                / 1fr;
+                / 100%;
         }
         
         &:not(.isHome) {
             grid-template:
                 'view' 1fr
                 'navigation' auto
-                / 1fr;
+                / 100%;
         }
         
         &.isHome .view {
@@ -129,12 +113,20 @@ html, body {
         }
     }
     
-    @media only screen and (min-width: 1200px) {
+    @include tablet {
+        grid-template:
+            'clock view' 1fr
+            ' side view' 2fr
+            'navigation view' auto
+            / 50% 50%;
+    }
+    
+    @include desktop {
         grid-template:
             'clock view' 1fr
             'side view' 2fr
             'navigation view' auto
-            / .25fr .75fr;
+            / 25% 75%;
     }
     
     .clock {
@@ -156,7 +148,16 @@ html, body {
     }
 
     a {
-        color: var(--main-color);
+        color: var(--color-main);
+        
+        @include desktop {
+            text-decoration: none;
+            transition: text-decoration .3s ease;
+            
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }
 </style>

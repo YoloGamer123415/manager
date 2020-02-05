@@ -32,6 +32,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "src/assets/style/mixins";
+
 $opacity: .25;
 
 div.Option {
@@ -39,7 +41,7 @@ div.Option {
     cursor: pointer;
     padding: .5em 1em;
     background-color: transparent;
-    border-bottom: 2px solid var(--main-color);
+    border-bottom: 2px solid var(--color-main);
     
     &:first-of-type {
         border-radius: 5px 5px 0 0;
@@ -62,7 +64,7 @@ div.Option {
     }
     
     /* TODO: gaan we dit nog anders doen? */
-    @media only screen and (min-width: 1200px) {
+    @include desktop {
         &::after {
             content: '';
             position: absolute;
@@ -70,12 +72,12 @@ div.Option {
             left: 0;
             bottom: 0;
             right: 0;
-            background-color: var(--main-color);
+            background-color: var(--color-main);
             opacity: 0;
             transition: opacity .3s ease;
             z-index: -1;
         }
-        
+    
         &:hover::after {
             opacity: $opacity;
         }

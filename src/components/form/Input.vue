@@ -54,15 +54,16 @@ div.Input {
     position: relative;
     min-width: 300px;
     height: fit-content;
+    user-select: none;
 
     label {
         position: absolute;
-        top: $border;
-        left: $border;
+        top: 0;
+        left: 0;
         display: flex;
         align-items: center;
         max-width: calc(100% - 2 * (1em + #{$border}));
-        max-height: calc(100% - 2 * (.5em + #{$border}));
+        max-height: calc(100% - 2 * #{$padding});
         padding: #{$padding} #{$padding * 2};
         border-radius: 5px;
         background-color: var(--current-theme-background);
@@ -79,24 +80,26 @@ div.Input {
         &.required::after {
             content: '*';
             margin-left: .3em;
-            color: var(--main-color);
+            color: var(--color-main);
         }
     }
     
     input {
         -webkit-appearance: none;
-        width: calc(100% - 2 * (1em + #{$border}));
+        width: calc(100% - 2 * #{$padding * 2});
         padding: #{$padding} #{$padding * 2};
         background-color: transparent;
         border: none;
-        border-bottom: $border solid var(--inactive-color);
+        border-bottom: $border solid var(--color-inactive);
         color: var(--current-theme-text);
         font-size: 16px;
         outline: none;
         transition: border-color #{$time} ease;
         
-        &:focus {
-            border-color: var(--main-color);
+        &:hover,
+        &:focus,
+        &:not(:placeholder-shown) {
+            border-color: var(--color-main);
         }
         
         &:not(:focus)::-webkit-input-placeholder {

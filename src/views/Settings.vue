@@ -3,29 +3,40 @@
         <h1 class="settings">{{ $t('settings.title') }}</h1>
         
         <div class="setting language">
-            <label for="language">{{ $t('settings.language') }}:</label>
-            <select id="language" v-model="selectedLanguage">
-                <option v-for="lang in languages" :key="lang" :value="lang">
-                    {{ lang }}
-                </option>
-            </select>
+            <div class="label">{{ $t('settings.language') }}:</div>
+            
+            <div class="option">
+                <Select>
+                    <option v-for="lang in languages" :key="lang" :value="lang">
+                        {{ lang }}
+                    </option>
+                </Select>
+            </div>
+        </div>
     
-            <br>
-            
-            <label for="theme">{{ $t('settings.theme') }}:</label>
-            <select id="theme" v-model="selectedTheme">
-                <option v-for="available in $theme.availableThemes" :key="available" :value="available">
-                    {{ available }}
-                </option>
-            </select>
-            
-            <br>
+        <div class="setting theme">
+            <div class="label">{{ $t('settings.theme') }}:</div>
+        
+            <div class="option">
+                <Select>
+                    <option v-for="available in $theme.availableThemes" :key="available" :value="available">
+                        {{ available }}
+                    </option>
+                </Select>
+            </div>
+        </div>
     
-            <label for="main-color">{{ $t('settings.mainColor') }}:</label>
-            <input type="text" id="main-color" v-model="mainColor" :placeholder="$theme.defaultMainColor">
-            
-            <br>
-            
+        <div class="setting theme">
+            <div class="label">{{ $t('settings.mainColor') }}:</div>
+        
+            <Input
+                id="settings-maincolor"
+                :label="$t('settings.mainColor')"
+                :example="$theme.defaultMainColor"
+            />
+        </div>
+        
+        <div class="setting language">
             <label for="fullscreen">{{ $t('settings.fullscreen') }}:</label>
             <input type="checkbox" id="fullscreen" v-model="fullscreen">
             
@@ -41,9 +52,12 @@
 <script>
 import languages from "@/../public/lang/all";
 import EventBus from "@/EventBus";
+import Select from "@/components/form/Select/Index";
+import Input from "@/components/form/Input";
 
 export default {
     name: "Settings",
+    components: {Input, Select},
     data() {
         return {
             languages: languages.all.sort(),

@@ -60,7 +60,7 @@ div#BusyBar {
     div.inner-bar {
         width: $width;
         height: $width;
-        background-color: var(--main-color);
+        background-color: var(--color-main);
         border-radius: 100px;
         transition: height .2s ease;
     }

@@ -1,6 +1,21 @@
 <template>
     <div id="Clock">
-        <div class="time" v-html="time" />
+        <div class="time">
+            <span v-text="$t('time.day', {
+                day: $t(`days.${time.day}.long`),
+                dayN: time.dayN,
+                month: $t(`months.${time.month}.long`),
+                year: time.year
+            })" />
+            
+            <br>
+            
+            <span v-text="$t('time.time', {
+                hours: time.hours,
+                minutes: time.minutes,
+                seconds: time.seconds
+            })" />
+        </div>
         
         <div class="busy-bars" ref="busyBars"></div>
     </div>
@@ -15,12 +30,20 @@ export default {
     name: "Clock",
     data() {
         return {
-            time: null
+            time: {
+                seconds: null,
+                minutes: null,
+                hours: null,
+                day: null,
+                dayN: null,
+                month: null,
+                year: null
+            }
         }
     },
     mounted() {
         setInterval(() => {
-            this.time = this.formatTime(new Date());
+            this.formatTime(new Date());
         }, 500);
 
         const ELEMENT = Vue.extend(BusyBarWrapper);
@@ -55,47 +78,39 @@ export default {
         /**
          * Format the time into a human readable format.
          * @param {Date} time
-         * @returns {string}
          */
         formatTime(time) {
-            let ret = '';
             const DAYS = [
-                'days.sunday.long',
-                'days.monday.long',
-                'days.tuesday.long',
-                'days.wednesday.long',
-                'days.thursday.long',
-                'days.friday.long',
-                'days.saturday.long'
+                'sunday',
+                'monday',
+                'tuesday',
+                'wednesday',
+                'thursday',
+                'friday',
+                'saturday'
             ];
             const MONTHS = [
-                'months.january.long',
-                'months.february.long',
-                'months.march.long',
-                'months.april.long',
-                'months.may.long',
-                'months.june.long',
-                'months.july.long',
-                'months.august.long',
-                'months.september.long',
-                'months.october.long',
-                'months.november.long',
-                'months.december.long'
+                'january',
+                'february',
+                'march',
+                'april',
+                'may',
+                'june',
+                'july',
+                'august',
+                'september',
+                'october',
+                'november',
+                'december'
             ];
             
-            let day = this.$t(DAYS[time.getDay()]);
-            let dayN = time.getDate().toString();
-            let month = this.$t(MONTHS[time.getMonth()]);
-            let year = time.getFullYear().toString();
-            let hours = time.getHours().toString().padStart(2, '0');
-            let minutes = time.getMinutes().toString().padStart(2, '0');
-            let seconds = time.getSeconds().toString().padStart(2, '0');
-            
-            ret += this.$t('time.day', { day, dayN, month, year });
-            ret += '<br>';
-            ret += this.$t('time.time', { hours, minutes, seconds });
-            
-            return ret;
+            this.time.day = DAYS[time.getDay()];
+            this.time.dayN = time.getDate().toString();
+            this.time.month = MONTHS[time.getMonth()];
+            this.time.year = time.getFullYear().toString();
+            this.time.hours = time.getHours().toString().padStart(2, '0');
+            this.time.minutes = time.getMinutes().toString().padStart(2, '0');
+            this.time.seconds = time.getSeconds().toString().padStart(2, '0');
         }
     }
 }

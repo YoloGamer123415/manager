@@ -1,14 +1,16 @@
 <template>
     <div id="Test">
-        <!--<Input
+        <Input
             id="goeie-test"
             required
             label="welp idk"
             example="Typ wat ofzo idk"
-        />-->
+        />
         
         <Select
             id="goeie-test-select"
+            label="Kies gewoon wat"
+            :required="true"
         >
             <option value="optie-1">Optie 1</option>
             <option value="optie-2">Optie 2</option>
@@ -40,14 +42,14 @@
 </template>
 
 <script>
-// import Input from "@/components/form/Input";
+import Input from "@/components/form/Input";
 import Select from "@/components/form/Select/Index";
 
 export default {
     name: "Test",
     components: {
         Select,
-        // Input
+        Input
     }
 }
 </script>
@@ -58,5 +60,9 @@ div#Test {
     align-items: center;
     justify-content: center;
     color: var(--current-theme-text);
+    
+    > :not(:first-of-type) {
+        margin-left: 1.5em;
+    }
 }
 </style>

@@ -45,7 +45,7 @@ export default {
 
         function updateMainColor() {
             if (validColor(Theme.mainColor))
-                root.style.setProperty(`--main-color`, Theme.mainColor);
+                root.style.setProperty(`--color-main`, Theme.mainColor);
         }
 
         updateColors();

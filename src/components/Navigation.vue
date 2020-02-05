@@ -59,6 +59,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "src/assets/style/mixins";
+
 $width: 3em;
 
 div#Navigation {
@@ -76,7 +78,7 @@ div#Navigation {
         transition: filter .3s ease;
         
         // TODO: blijft dit 1200px?
-        @media only screen and (min-width: 1200px) {
+        @include desktop {
             transition:
                 filter .3s ease,
                 width .3s ease;
@@ -90,14 +92,14 @@ div#Navigation {
             filter: alpha(1);
             
             // TODO: blijft dit 1200px?
-            @media only screen and (min-width: 1200px) {
+            @include desktop {
                 width: $width * 3.25;
                 overflow: visible;
             }
         }
         
         &.home {
-            background-color: var(--main-color);
+            background-color: var(--color-main);
         }
         
         &.agenda {
@@ -113,7 +115,7 @@ div#Navigation {
         }
         
         &.settings {
-            background-color: var(--main-color);
+            background-color: var(--color-main);
         }
         
         div.icon {

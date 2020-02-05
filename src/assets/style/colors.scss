@@ -1,0 +1,21 @@
+$color-main: #00E6E6;
+$color-dark: #252525;
+$color-error: #f97c7f;
+$color-correct: #00dea6;
+
+:root {
+  --color-main: #{$color-main};
+  --color-inactive: #aaaaaa;
+
+  --theme-light-text: #{$color-dark};
+  --theme-light-background: #ffffff;
+  --theme-light-scrollbar: #bbbbbb;
+
+  --theme-dark-text: #ffffff;
+  --theme-dark-background: #{$color-dark};
+  --theme-dark-scrollbar: #444444;
+
+  --current-theme-text: var(--theme-dark-text);
+  --current-theme-background: var(--theme-dark-background);
+  --current-theme-scrollbar: var(--theme-dark-scrollbar);
+}
