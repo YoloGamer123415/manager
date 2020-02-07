@@ -43,7 +43,7 @@
 
 <script>
 import Input from "@/components/form/Input";
-import Select from "@/components/form/Select/Index";
+import Select from "@/components/form/Select/index";
 
 export default {
     name: "Test",

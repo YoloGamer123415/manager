@@ -1,10 +1,12 @@
 $color-main: #00E6E6;
 $color-dark: #252525;
-$color-error: #f97c7f;
-$color-correct: #00dea6;
+$color-error: #ef5350;
+$color-success: #4caf50;
 
 :root {
   --color-main: #{$color-main};
+  --color-error: #{$color-error};
+  --color-success: #{$color-success};
   --color-inactive: #aaaaaa;
 
   --theme-light-text: #{$color-dark};

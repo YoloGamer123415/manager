@@ -52,7 +52,7 @@
 <script>
 import languages from "@/../public/lang/all";
 import EventBus from "@/EventBus";
-import Select from "@/components/form/Select/Index";
+import Select from "@/components/form/Select/index";
 import Input from "@/components/form/Input";
 
 export default {

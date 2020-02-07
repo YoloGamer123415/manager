@@ -87,6 +87,20 @@
             "long": "december"
         }
     },
+    "notification": {
+        "error": {
+            "unknown": {
+                "title": null,
+                "text": "Er is een onbekende fout opgetreden."
+            }
+        },
+        "success": {
+        
+        },
+        "info": {
+        
+        }
+    },
     "navigation": {
         "home": "Home",
         "agenda": "Agenda",

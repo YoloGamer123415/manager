@@ -4,6 +4,8 @@
         ref="app"
         :class="{ isHome: $route.name === 'home' }"
     >
+        <Notifications />
+        
         <Clock class="clock" />
 
         <div class="side"></div>
@@ -17,11 +19,13 @@
 <script>
 import "@/assets/style/colors.scss";
 import Navigation from "@/components/Navigation";
-import Clock from "./components/Clock/Index";
+import Clock from "./components/Clock/index";
+import Notifications from "@/components/Notifications/index";
 
 export default {
     name: 'app',
     components: {
+        Notifications,
         Clock,
         Navigation
     },

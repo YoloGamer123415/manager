@@ -8,6 +8,7 @@ import i18n from "@/plugins/i18n";
 import Storage from "vue-ls";
 import theme from "@/plugins/theme";
 import fullscreen from "@/plugins/fullscreen";
+import notifications from "@/plugins/notifications";
 
 const lsOptions = {
   namespace: 'manager__',
@@ -20,6 +21,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.use(Storage, lsOptions);
 Vue.use(theme);
 Vue.use(fullscreen);
+Vue.use(notifications);
 
 Vue.config.productionTip = false;
 
