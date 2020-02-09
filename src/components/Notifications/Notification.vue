@@ -42,14 +42,15 @@ export default {
         }
     },
     created() {
-        const ccc = new ColorContrastChecker();
-        const fontSize = 16;
         const black = '#000000';
-        const white = '#ffffff'
-        
-        if (ccc.isLevelAA(this.$theme.mainColor, black, fontSize))
+        const white = '#ffffff';
+
+        // eslint-disable-next-line no-console
+        console.log(this);
+
+        if (this.$contrastChecker.check(this.$theme.mainColor, black))
             this.color = black;
-        else if (ccc.isLevelAA(this.$theme.mainColor, white, fontSize))
+        else if (this.$contrastChecker.check(this.$theme.mainColor, white))
             this.color = white;
     },
     mounted() {

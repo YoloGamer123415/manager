@@ -9,6 +9,7 @@ import Storage from "vue-ls";
 import theme from "@/plugins/theme";
 import fullscreen from "@/plugins/fullscreen";
 import notifications from "@/plugins/notifications";
+import contrastChecker from "./plugins/contrastChecker";
 
 const lsOptions = {
   namespace: 'manager__',
@@ -22,6 +23,7 @@ Vue.use(Storage, lsOptions);
 Vue.use(theme);
 Vue.use(fullscreen);
 Vue.use(notifications);
+Vue.use(contrastChecker);
 
 Vue.config.productionTip = false;
 
