@@ -1,4 +1,4 @@
-import {checkContrast} from "wcag-color-contrast-checker";
+import checkContrast from "@/assets/javascript/contrastChecker";
 
 export default {
     install(Vue) {
@@ -9,8 +9,8 @@ export default {
                  * @param {string} color
                  * @return {boolean}
                  */
-                isRgb(color) {
-                    return color.trim().startsWith('rgb');
+                isHex(color) {
+                    return (/^#[0-9a-f]{6}$|^#[0-9a-f]{3}$/).test(color.trim());
                 },
                 /**
                  * Transform the hex color into rgb form.
@@ -18,8 +18,8 @@ export default {
                  * @returns {string} The color in rgb format
                  * @example
                  * // both return 'rgb(0,0,0)'
-                 * rgbToHex('#000')
-                 * rgbToHex('#000000')
+                 * hexToRgb('#000')
+                 * hexToRgb('#000000')
                  */
                 hexToRgb: function(hex) {
                     hex = hex.replace(/^#/, '');
@@ -34,7 +34,7 @@ export default {
                     return `rgb(${r},${g},${b})`;
                 },
                 splitColor: function (color) {
-                    if (this.isRgb(color))
+                    if (this.isHex(color))
                         color = this.hexToRgb(color);
 
                     let temp = color.replace(/rgb\((.+)\)/, '$1')
@@ -51,10 +51,7 @@ export default {
                     color1 = this.splitColor(color1);
                     color2 = this.splitColor(color2);
 
-                    // eslint-disable-next-line no-console
-                    console.log(color1, color2);
-
-                    return checkContrast(color1, color2)
+                    return checkContrast(color1, color2);
                 }
             }
         });

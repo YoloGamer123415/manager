@@ -24,16 +24,23 @@ export default {
                  * Emit an event to show a new notification.
                  * @param {NotificationOptions} options
                  */
-                newNotification: function (options) {
-                    options.key = typeof options.key == "string"
-                        ? options.key
-                        : 'error.unknown';
+                newNotification (options) {
+                    if (!(
+                        options.key &&
+                            options.type
+                    )) {
+                        throw new Error("Please specify all options")
+                    }
+
                     options.type = types.includes(options.type)
                         ? options.type
                         : 'info';
+                    options.key = typeof options.key == "string"
+                        ? `${options.type}.${options.key}`
+                        : 'error.unknown';
                     options.time = typeof options.time == "number" && options.time > 1000 && options.time < 10000
                         ? options.time
-                        : 3000;
+                        : 5000;
 
                     this.callbacks.forEach(cb => {
                         if (typeof cb == "function")
@@ -45,7 +52,7 @@ export default {
                  * @param callback
                  * @returns {boolean} Whether or not the callback was valid.
                  */
-                registerNotificationCallback: function (callback) {
+                registerNotificationCallback (callback) {
                     if (typeof callback == "function") {
                         this.callbacks.push(callback);
                         return true

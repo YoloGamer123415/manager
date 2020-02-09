@@ -1,5 +1,4 @@
 {
-    "loading": "Bezig met laden",
     "days": {
         "sunday": {
             "letter": "Z",
@@ -90,7 +89,6 @@
     "notification": {
         "error": {
             "unknown": {
-                "title": null,
                 "text": "Er is een onbekende fout opgetreden."
             }
         },
@@ -118,5 +116,9 @@
         "theme": "Thema",
         "mainColor": "Hoofd kleur",
         "fullscreen": "Volledig scherm"
+    },
+    "text": {
+        "loading": "Bezig met laden",
+        "see-more": "Bekijk meer"
     }
 }

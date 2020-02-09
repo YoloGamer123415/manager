@@ -10,6 +10,7 @@ import theme from "@/plugins/theme";
 import fullscreen from "@/plugins/fullscreen";
 import notifications from "@/plugins/notifications";
 import contrastChecker from "./plugins/contrastChecker";
+import http from "@/plugins/http";
 
 const lsOptions = {
   namespace: 'manager__',
@@ -24,6 +25,9 @@ Vue.use(theme);
 Vue.use(fullscreen);
 Vue.use(notifications);
 Vue.use(contrastChecker);
+Vue.use(http);
+
+Vue.prototype.$apiEndpoint = `http://192.168.2.9:8000`;
 
 Vue.config.productionTip = false;
 

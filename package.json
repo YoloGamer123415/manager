@@ -19,7 +19,7 @@
     "vue-i18n": "^8.15.3",
     "vue-ls": "^3.2.1",
     "gsap": "^3.1.1",
-    "wcag-color-contrast-checker": "^1.0.1"
+    "axios": "^0.19.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",

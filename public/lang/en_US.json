@@ -1,5 +1,4 @@
 {
-    "loading": "Loading",
     "days": {
         "sunday": {
             "letter": "S",
@@ -90,7 +89,6 @@
     "notification": {
         "error": {
             "unknown": {
-                "title": null,
                 "text": "An unknown error occurred."
             }
         },
@@ -99,7 +97,6 @@
         },
         "info": {
             "test": {
-                "title": "Test",
                 "text": "Goeie test notifictie ofzo, idk :)"
             }
         }
@@ -121,5 +118,9 @@
         "theme": "Theme",
         "mainColor": "Main color",
         "fullscreen": "Fullscreen"
+    },
+    "text": {
+        "loading": "Bezig met laden",
+        "see-more": "See more"
     }
 }

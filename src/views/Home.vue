@@ -1,16 +1,19 @@
 <template>
     <div id="Home">
-        <p>Home</p>
-        
-        <button @click="$notifications.newNotification({
-            key: `error.unknown`
-        })">yeet</button>
+    
     </div>
 </template>
 
 <script>
 export default {
-    name: "Home"
+    name: "Home",
+    created() {
+        this.$http.get(`${this.$apiEndpoint}/news`)
+            .then(res => {
+                // eslint-disable-next-line no-console
+                console.log('wtf', res);
+            });
+    }
 }
 </script>
 
@@ -19,3 +22,4 @@ div#Home {
 
 }
 </style>
++

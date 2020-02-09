@@ -29,14 +29,17 @@ export default {
         Clock,
         Navigation
     },
-    mounted() {
+    created() {
+        // TODO: doe dit veilig!!!!!!!!!!
+        this.$http.setToken('TestToken');
+        
         if (!this.$ls.get('language')) {
             this.$ls.set('language', this.$i18n.locale);
         }
         
         this.$ls.on('language', newLang => {
             this.$i18n.locale = newLang;
-        })
+        });
     }
 }
 </script>
@@ -51,7 +54,7 @@ $gap: 1em;
 ::-webkit-scrollbar {
     width: 7px;
     height: 7px;
-    background-color: var(--current-theme-background);
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -65,7 +68,7 @@ $gap: 1em;
 
 * {
     font-family: 'Open Sans', sans-serif;
-    line-height: 1.4;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
 }
