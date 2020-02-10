@@ -30,9 +30,8 @@ export default {
         Navigation
     },
     created() {
-        // TODO: doe dit veilig!!!!!!!!!!
         this.$http.setToken('TestToken');
-        
+
         if (!this.$ls.get('language')) {
             this.$ls.set('language', this.$i18n.locale);
         }
@@ -92,8 +91,8 @@ html, body {
     gap: $gap;
     width: calc(100% - 2 * #{$gap});
     height: calc(100% - 2 * #{$gap});
-    padding: $gap;
-    
+    padding: $gap 0 $gap $gap;
+
     @include phone {
         &.isHome {
             grid-template:
@@ -152,6 +151,8 @@ html, body {
     
     .view {
         grid-area: view;
+        padding-right: $gap;
+        overflow: auto;
     }
 
     a {

@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         notification (options) {
-            const key = `notification.${options.key}.text`;
+            const key = `notification.${options.key}`;
             const text = this.$t(key) === key
                 ? null
                 : this.$t(key);

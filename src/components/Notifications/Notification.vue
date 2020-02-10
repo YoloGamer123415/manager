@@ -100,7 +100,6 @@ div.Notification {
         bottom: 0;
         right: 0;
         background-color: transparent;
-        border: #{$border-width} solid var(--color-main);
         border-radius: $border-radius;
         filter: brightness(75%);
         z-index: 1;
@@ -121,14 +120,26 @@ div.Notification {
     
     &.info {
         background-color: var(--color-main);
+
+        &::after {
+            border: #{$border-width} solid var(--color-main);
+        }
     }
     
     &.error {
         background-color: var(--color-error);
+
+        &::after {
+            border: #{$border-width} solid var(--color-error);
+        }
     }
     
     &.success {
         background-color: var(--color-success);
+
+        &::after {
+            border: #{$border-width} solid var(--color-success);
+        }
     }
     
     @keyframes in {

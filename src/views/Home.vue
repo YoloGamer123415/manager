@@ -1,25 +1,85 @@
 <template>
-    <div id="Home">
-    
+    <div id="Home" ref="home">
+        <Loader ref="loader" />
     </div>
 </template>
 
 <script>
+import Vue from "vue";
+import News from "../components/News";
+import Loader from "../components/Loader";
+
 export default {
     name: "Home",
+    components: {Loader},
     created() {
-        this.$http.get(`${this.$apiEndpoint}/news`)
+        const ELEMENT = Vue.extend(News);
+
+        this.$http.get(`/news`, {
+            headers: {
+                'x-token': 'TestToken'
+            }
+        })
             .then(res => {
+                let totalNews = res.data.length;
+
+                for (let i = 0; i < totalNews; i++) {
+                    let news = res.data.news[i];
+                    let elem = document.createElement('div');
+                    // elem.id = this.parseId(Date.now());
+
+                    this.$refs.home.appendChild(elem);
+
+                    let instance = new ELEMENT({
+                        propsData: {
+                            image: news.image,
+                            title: news.title,
+                            text: news.description,
+                            url: news.url,
+                            author: news.author,
+                            source: news.source
+                        }
+                    });
+
+                    instance.$mount(elem)
+                }
+
+                this.$refs.loader.$emit('stop');
+            })
+            .catch(err => {
+                this.$notifications.newNotification({
+                    key: 'network',
+                    type: 'error'
+                });
                 // eslint-disable-next-line no-console
-                console.log('wtf', res);
+                console.error(err);
             });
+    },
+    methods: {
+        /**
+         *
+         * @param {number | string} id
+         * @return {string}
+         */
+        parseId (id) {
+            //               0123456789
+            const LETTERS = 'abcdefghij';
+            let ret = '';
+
+            if (typeof id == "number")
+                id = id.toString();
+
+            for (let i = 0; i < id.length; i++)
+                ret += LETTERS[parseInt(id[i])];
+
+            return ret;
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
 div#Home {
-
+    position: relative;
 }
 </style>
-+

@@ -17,7 +17,7 @@
             })" />
         </div>
         
-        <div class="busy-bars" ref="busyBars"></div>
+        <div class="busy-bars" ref="busyBars" />
     </div>
 </template>
 

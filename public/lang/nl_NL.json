@@ -88,9 +88,8 @@
     },
     "notification": {
         "error": {
-            "unknown": {
-                "text": "Er is een onbekende fout opgetreden."
-            }
+            "unknown": "Er is een onbekende fout opgetreden.",
+            "network": "Er is een netwerkfout opgetreden."
         },
         "success": {
         

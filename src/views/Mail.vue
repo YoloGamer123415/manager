@@ -1,6 +1,11 @@
 <template>
     <div id="Mail">
         <p>Mail</p>
+
+        <button @click="$notifications.newNotification({
+            key: 'test',
+            type: 'info'
+        })">Yeet</button>
     </div>
 </template>
 
