@@ -6,6 +6,7 @@
             :id="id"
             :required="required ? 'required' : ''"
             :placeholder="example"
+            @input="change ? change : () => {}"
         />
         <label
             v-if="label"
@@ -40,6 +41,10 @@ export default {
             type: Boolean,
             required: false
         },
+        change: {
+            type: Function,
+            required: false
+        }
     }
 }
 </script>
@@ -54,6 +59,7 @@ div.Input {
     position: relative;
     min-width: 300px;
     height: fit-content;
+    margin-top: $font;
     user-select: none;
 
     label {

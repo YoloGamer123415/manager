@@ -29,6 +29,7 @@ export default {
             }
         });
         const cycle = [
+            'lighter',
             'darker',
             'background',
             'text',

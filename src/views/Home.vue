@@ -39,6 +39,7 @@ export default {
                     instance.$mount(elem)
                 }
 
+                
                 this.$refs.loader.$emit('stop');
             })
             .catch(err => {

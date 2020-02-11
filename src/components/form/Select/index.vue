@@ -29,7 +29,12 @@
             />
         </div>
     
-        <select :id="id" class="fake-select" ref="fakeSelect">
+        <select
+            :id="id"
+            class="fake-select"
+            ref="fakeSelect"
+            @input="change"
+        >
             <slot/>
         </select>
     </div>
@@ -117,6 +122,9 @@
                 });
                 
                 return index;
+            },
+            change () {
+                this.$emit('change', data);
             }
         }
     }

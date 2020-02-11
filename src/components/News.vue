@@ -2,7 +2,14 @@
     <a
         class="News"
         :href="url"
+        :title="title"
     >
+        <img
+            v-if="image"
+            :src="image"
+            :alt="title"
+        >
+        
         <h1
             v-if="title"
             class="title"
@@ -51,12 +58,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "src/assets/style/mixins";
+
 a.News {
     position: relative;
     display: inline-block;
     padding: 1em;
-    background-color: var(--current-theme-darker);
+    background-color: var(--current-theme-lighter);
     color: var(--current-theme-text) !important;
+    border-radius: 5px;
+    
+    @include desktop {
+        box-shadow: 0 0 0 0 rgba(#000000, 0.5);
+        transition: box-shadow .3s ease;
+        
+        &:hover {
+            text-decoration: none !important;
+            box-shadow: 1px 3px 5px 0 rgba(#000000, 0.5);
+        }
+    }
+    
+    &:nth-child(even) {
+        background-color: var(--current-theme-darker);
+    }
 
     &:not(:last-of-type) {
         margin-bottom: 1.5em;

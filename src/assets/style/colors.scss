@@ -3,22 +3,27 @@ $color-dark: #252525;
 $color-error: #ef5350;
 $color-success: #4caf50;
 
+$percentage: 5%;
+
 :root {
   --color-main: #{$color-main};
   --color-error: #{$color-error};
   --color-success: #{$color-success};
   --color-inactive: #aaaaaa;
 
-  --theme-light-darken: #{darken(#ffffff, 50%)};
+  --theme-light-lighter: #{lighten(#ffffff, $percentage)};
+  --theme-light-darken: #{darken(#ffffff, $percentage)};
   --theme-light-text: #{$color-dark};
   --theme-light-background: #ffffff;
   --theme-light-scrollbar: #bbbbbb;
 
-  --theme-dark-darker: #{darken($color-dark, 50%)};
+  --theme-dark-lighter: #{lighten($color-dark, $percentage)};
+  --theme-dark-darker: #{darken($color-dark, $percentage)};
   --theme-dark-text: #ffffff;
   --theme-dark-background: #{$color-dark};
   --theme-dark-scrollbar: #444444;
 
+  --current-theme-lighter: var(--theme-dark-lighter);
   --current-theme-darker: var(--theme-dark-darker);
   --current-theme-text: var(--theme-dark-text);
   --current-theme-background: var(--theme-dark-background);

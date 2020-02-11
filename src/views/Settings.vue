@@ -3,10 +3,12 @@
         <h1 class="settings">{{ $t('settings.title') }}</h1>
         
         <div class="setting language">
-            <div class="label">{{ $t('settings.language') }}:</div>
-            
             <div class="option">
-                <Select>
+                <Select
+                    id="language"
+                    :label="$t('settings.language') + ':'"
+                    @change=""
+                >
                     <option v-for="lang in languages" :key="lang" :value="lang">
                         {{ lang }}
                     </option>
@@ -15,10 +17,11 @@
         </div>
     
         <div class="setting theme">
-            <div class="label">{{ $t('settings.theme') }}:</div>
-        
             <div class="option">
-                <Select>
+                <Select
+                    id="theme"
+                    :label="$t('settings.theme') + ':'"
+                >
                     <option v-for="available in $theme.availableThemes" :key="available" :value="available">
                         {{ available }}
                     </option>
@@ -27,8 +30,6 @@
         </div>
     
         <div class="setting theme">
-            <div class="label">{{ $t('settings.mainColor') }}:</div>
-        
             <Input
                 id="settings-maincolor"
                 :label="$t('settings.mainColor')"
@@ -66,6 +67,9 @@ export default {
             mainColor: this.$theme.mainColor,
             fullscreen: this.$fullscreen.isFullscreen
         }
+    },
+    methods: {
+    
     },
     watch: {
         selectedLanguage: function (newLang) {
