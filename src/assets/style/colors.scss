@@ -9,14 +9,17 @@ $color-success: #4caf50;
   --color-success: #{$color-success};
   --color-inactive: #aaaaaa;
 
+  --theme-light-darken: #{darken(#ffffff, 50%)};
   --theme-light-text: #{$color-dark};
   --theme-light-background: #ffffff;
   --theme-light-scrollbar: #bbbbbb;
 
+  --theme-dark-darker: #{darken($color-dark, 50%)};
   --theme-dark-text: #ffffff;
   --theme-dark-background: #{$color-dark};
   --theme-dark-scrollbar: #444444;
 
+  --current-theme-darker: var(--theme-dark-darker);
   --current-theme-text: var(--theme-dark-text);
   --current-theme-background: var(--theme-dark-background);
   --current-theme-scrollbar: var(--theme-dark-scrollbar);

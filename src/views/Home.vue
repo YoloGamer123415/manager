@@ -15,18 +15,13 @@ export default {
     created() {
         const ELEMENT = Vue.extend(News);
 
-        this.$http.get(`/news`, {
-            headers: {
-                'x-token': 'TestToken'
-            }
-        })
+        this.$http.get(`/news`)
             .then(res => {
                 let totalNews = res.data.length;
 
                 for (let i = 0; i < totalNews; i++) {
                     let news = res.data.news[i];
                     let elem = document.createElement('div');
-                    // elem.id = this.parseId(Date.now());
 
                     this.$refs.home.appendChild(elem);
 

@@ -95,9 +95,7 @@
         
         },
         "info": {
-            "test": {
-                "text": "Goeie test notifictie ofzo, idk :)"
-            }
+            "test": "Goeie test notifictie ofzo, idk :)"
         }
     },
     "navigation": {

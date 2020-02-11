@@ -85,7 +85,7 @@ div.Notification {
     border-radius: $border-radius;
     box-shadow: 1px 3px 5px 0 rgba($color: #000000, $alpha: .25);
     overflow: hidden;
-    animation: in .3s ease-out;
+    animation: in .3s ease-ogbut;
     
     &.removing {
         margin-left: calc(100% + #{$padding} + 1em);

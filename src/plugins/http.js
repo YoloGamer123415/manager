@@ -56,7 +56,7 @@ export default {
                     console.log(corsProxy, apiEndpoint, url, `${corsProxy}/${apiEndpoint}/${url.replace(/^\//, '')}`);
                     temp.method = requestType;
                     temp.url = `${corsProxy}/${apiEndpoint}/${url.replace(/^\//, '')}`;
-                    options.headers['x-token'] = this.token;
+                    temp.headers['x-token'] = this.token;
 
                     return temp;
                 },
@@ -68,7 +68,7 @@ export default {
                  * @param {function(code: number): boolean} valid
                  * @return {AxiosPromise}
                  */
-                get (url, options, valid = () => true) {
+                get (url, options, valid = this.validFunction) {
                     return new Promise((resolve, reject) => {
                         this.request(
                             this.parseOptions(options, url, 'get')
@@ -89,7 +89,7 @@ export default {
                  * @param {function(code: number): boolean} valid
                  * @return {AxiosPromise}
                  */
-                post (url, options, valid = () => true) {
+                post (url, options, valid = this.validFunction) {
                     return new Promise((resolve, reject) => {
                         this.request(
                             this.parseOptions(options, url, 'post')

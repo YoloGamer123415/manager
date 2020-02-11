@@ -52,6 +52,10 @@ export default {
 
 <style lang="scss" scoped>
 a.News {
+    position: relative;
+    display: inline-block;
+    padding: 1em;
+    background-color: var(--current-theme-darker);
     color: var(--current-theme-text) !important;
 
     &:not(:last-of-type) {
