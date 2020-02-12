@@ -7,7 +7,7 @@
                 <Select
                     id="language"
                     :label="$t('settings.language') + ':'"
-                    @change=""
+                    @change="languageChange"
                 >
                     <option v-for="lang in languages" :key="lang" :value="lang">
                         {{ lang }}
@@ -21,8 +21,14 @@
                 <Select
                     id="theme"
                     :label="$t('settings.theme') + ':'"
+                    @change="themeChange"
                 >
-                    <option v-for="available in $theme.availableThemes" :key="available" :value="available">
+                    <option
+                        v-for="(available, index) in $theme.availableThemes"
+                        :key="available"
+                        :value="available"
+                        :initSelectedIndex="available === $theme.mainColor ? index : null"
+                    >
                         {{ available }}
                     </option>
                 </Select>
@@ -34,6 +40,8 @@
                 id="settings-maincolor"
                 :label="$t('settings.mainColor')"
                 :example="$theme.defaultMainColor"
+                :initVal="mainColor"
+                @change="mainColorChange"
             />
         </div>
         
@@ -69,22 +77,24 @@ export default {
         }
     },
     methods: {
-    
-    },
-    watch: {
-        selectedLanguage: function (newLang) {
-            this.$i18n.locale = newLang;
-            this.$ls.set('language', newLang);
+        languageChange (newLanguage) {
+            this.selectedLanguage = newLanguage;
+            this.$i18n.locale = newLanguage;
+            this.$ls.set('language', newLanguage);
             EventBus.emit('change-lang');
         },
-        selectedTheme: function (newTheme) {
+        themeChange (newTheme) {
+            this.selectedTheme = newTheme;
             this.$theme.current = newTheme;
             this.$ls.set('theme', newTheme);
         },
-        mainColor: function (newColor) {
+        mainColorChange (newColor) {
+            this.mainColor = newColor;
             this.$theme.mainColor = newColor;
             this.$ls.set('main-color', newColor);
-        },
+        }
+    },
+    watch: {
         fullscreen: function (isFullscreen) {
             this.$fullscreen.toggle(true, isFullscreen);
         }

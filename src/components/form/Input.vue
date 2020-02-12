@@ -4,9 +4,10 @@
             type="text"
             :name="name"
             :id="id"
+            v-model="value"
             :required="required ? 'required' : ''"
             :placeholder="example"
-            @input="change ? change : () => {}"
+            @input="change"
         />
         <label
             v-if="label"
@@ -20,6 +21,11 @@
 <script>
 export default {
     name: "Input",
+    data() {
+        return {
+            value: this.initVal
+        }
+    },
     props: {
         name: {
             type: String,
@@ -28,6 +34,11 @@ export default {
         id: {
             type: String,
             required: true
+        },
+        initVal: {
+            type: String,
+            required: false,
+            default: ''
         },
         label: {
             type: String,
@@ -40,10 +51,11 @@ export default {
         required: {
             type: Boolean,
             required: false
-        },
-        change: {
-            type: Function,
-            required: false
+        }
+    },
+    methods: {
+        change () {
+            this.$emit('change', this.value);
         }
     }
 }

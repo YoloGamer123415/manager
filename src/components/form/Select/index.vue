@@ -33,7 +33,6 @@
             :id="id"
             class="fake-select"
             ref="fakeSelect"
-            @input="change"
         >
             <slot/>
         </select>
@@ -60,6 +59,10 @@
                 type: Boolean,
                 required: false,
                 default: false
+            },
+            initSelectedIndex: {
+                type: String,
+                required: false
             }
         },
         data() {
@@ -76,6 +79,15 @@
             const OPTION = Vue.extend(Option);
             const fakeSelect = this.$refs.fakeSelect;
             const selectOptions = this.$refs.options;
+
+            if (this.initSelectedIndex && parseInt(this.initSelectedIndex)) {
+                let i = parseInt(this.initSelectedIndex);
+                this.$refs.fakeSelect.selectedIndex = i;
+                this.selected = {
+                    value: fakeSelect.options[i].value,
+                    text: fakeSelect.options[i].text
+                }
+            }
 
             this.selected.text = this.$refs.fakeSelect.options[ this.$refs.fakeSelect.selectedIndex ].text;
             this.selected.value = this.$refs.fakeSelect.options[ this.$refs.fakeSelect.selectedIndex ].value;
@@ -111,6 +123,7 @@
                 if (selectionIndex >= 0) {
                     this.$refs.fakeSelect.selectedIndex = selectionIndex;
                     this.selected = option;
+                    this.$emit('change', option.value);
                 }
             },
             findSelectedIndex: function (option) {
@@ -122,9 +135,6 @@
                 });
                 
                 return index;
-            },
-            change () {
-                this.$emit('change', data);
             }
         }
     }
