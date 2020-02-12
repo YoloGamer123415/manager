@@ -6,6 +6,10 @@ $color-success: #4caf50;
 $percentage: 5%;
 
 :root {
+  --color-agenda: #1A73E8;
+  --color-mail: #C5221F;
+  --color-tasks: #F5BA15;
+
   --color-main: #{$color-main};
   --color-error: #{$color-error};
   --color-success: #{$color-success};

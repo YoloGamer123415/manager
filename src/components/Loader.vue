@@ -1,5 +1,8 @@
 <template>
-    <div class="Loader">
+    <div
+        class="Loader"
+        :style="{ fulldark }"
+    >
         <div class="loader-inner" />
     </div>
 </template>
@@ -7,6 +10,13 @@
 <script>
 export default {
     name: "Loader",
+    props: {
+        fulldark: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
+    },
     created() {
         this.$once('stop', () => {
             this.$destroy();
@@ -28,7 +38,12 @@ div.Loader {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba($color: #000000, $alpha: 0.75);
+    background-color: var(--current-theme-darker);
+    filter: alpha(.75);
+    
+    &.fulldark {
+        background-color: var(--current-theme-darker);
+    }
 
     div.loader-inner {
         width: 3em;

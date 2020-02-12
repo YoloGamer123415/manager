@@ -1,6 +1,7 @@
 <template>
     <a
         class="News"
+        target="_blank"
         :href="url"
         :title="title"
     >

@@ -9,7 +9,12 @@
                     :label="$t('settings.language') + ':'"
                     @change="languageChange"
                 >
-                    <option v-for="lang in languages" :key="lang" :value="lang">
+                    <option
+                        v-for="(lang, index) in languages"
+                        :key="lang"
+                        :value="lang"
+                        :data-selected="lang === $i18n.locale ? index : null"
+                    >
                         {{ lang }}
                     </option>
                 </Select>
@@ -27,7 +32,7 @@
                         v-for="(available, index) in $theme.availableThemes"
                         :key="available"
                         :value="available"
-                        :initSelectedIndex="available === $theme.mainColor ? index : null"
+                        :data-selected="available === $theme.current ? index : null"
                     >
                         {{ available }}
                     </option>

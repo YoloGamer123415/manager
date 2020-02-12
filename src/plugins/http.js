@@ -52,8 +52,6 @@ export default {
                     if (!temp.headers)
                         temp.headers = {};
 
-                    // eslint-disable-next-line no-console
-                    console.log(corsProxy, apiEndpoint, url, `${corsProxy}/${apiEndpoint}/${url.replace(/^\//, '')}`);
                     temp.method = requestType;
                     temp.url = `${corsProxy}/${apiEndpoint}/${url.replace(/^\//, '')}`;
                     temp.headers['x-token'] = this.token;

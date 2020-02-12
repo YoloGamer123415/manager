@@ -13,6 +13,8 @@
         <Navigation class="navigation" />
         
         <router-view class="view" />
+        
+        <NewButton />
     </div>
 </template>
 
@@ -21,10 +23,12 @@ import "@/assets/style/colors.scss";
 import Navigation from "@/components/Navigation";
 import Clock from "./components/Clock/index";
 import Notifications from "@/components/Notifications/index";
+import NewButton from "@/components/NewButton";
 
 export default {
     name: 'app',
     components: {
+        NewButton,
         Notifications,
         Clock,
         Navigation
@@ -155,7 +159,7 @@ html, body {
         overflow: auto;
     }
 
-    a {
+    a:not([role="button"]):not(.normal) {
         color: var(--color-main);
         
         @include desktop {

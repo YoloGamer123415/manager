@@ -1,6 +1,6 @@
 <template>
     <div id="Navigation">
-        <router-link to="/home" class="link home">
+        <router-link to="/home" class="link normal home">
             <div class="icon">
                 <font-awesome-icon icon="home" />
             </div>
@@ -10,7 +10,7 @@
             </div>
         </router-link>
     
-        <router-link to="/agenda" class="link agenda">
+        <router-link to="/agenda" class="link normal agenda">
             <div class="icon">
                 <font-awesome-icon icon="calendar-alt" />
             </div>
@@ -20,7 +20,7 @@
             </div>
         </router-link>
     
-        <router-link to="/mail" class="link mail">
+        <router-link to="/mail" class="link normal mail">
             <div class="icon">
                 <font-awesome-icon icon="envelope-open" />
             </div>
@@ -30,7 +30,7 @@
             </div>
         </router-link>
     
-        <router-link to="/tasks" class="link tasks">
+        <router-link to="/tasks" class="link normal tasks">
             <div class="icon">
                 <font-awesome-icon icon="tasks" />
             </div>
@@ -40,7 +40,7 @@
             </div>
         </router-link>
         
-        <router-link to="/settings" class="link settings">
+        <router-link to="/settings" class="link normal settings">
             <div class="icon">
                 <font-awesome-icon icon="cog" />
             </div>
@@ -103,15 +103,15 @@ div#Navigation {
         }
         
         &.agenda {
-            background-color: #1A73E8;
+            background-color: var(--color-agenda);
         }
         
         &.mail {
-            background-color: #C5221F;
+            background-color: var(--color-mail);
         }
         
         &.tasks {
-            background-color: #F5BA15;
+            background-color: var(--color-tasks);
         }
         
         &.settings {

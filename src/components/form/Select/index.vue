@@ -79,24 +79,28 @@
             const OPTION = Vue.extend(Option);
             const fakeSelect = this.$refs.fakeSelect;
             const selectOptions = this.$refs.options;
-
-            if (this.initSelectedIndex && parseInt(this.initSelectedIndex)) {
-                let i = parseInt(this.initSelectedIndex);
-                this.$refs.fakeSelect.selectedIndex = i;
-                this.selected = {
-                    value: fakeSelect.options[i].value,
-                    text: fakeSelect.options[i].text
-                }
-            }
-
+            
             this.selected.text = this.$refs.fakeSelect.options[ this.$refs.fakeSelect.selectedIndex ].text;
             this.selected.value = this.$refs.fakeSelect.options[ this.$refs.fakeSelect.selectedIndex ].value;
 
-            for (let i = 0; i < fakeSelect.options.length; i++)
+            for (let i = 0; i < fakeSelect.options.length; i++) {
                 this.options.push({
                     value: fakeSelect.options[i].value,
                     text: fakeSelect.options[i].text
                 });
+                
+                if (
+                    fakeSelect.options[i].hasAttribute('data-selected') &&
+                        !isNaN(parseInt(fakeSelect.options[i].getAttribute('data-selected')))
+                ) {
+                    let index = parseInt(fakeSelect.options[i].getAttribute('data-selected'));
+                    this.$refs.fakeSelect.selectedIndex = index;
+                    this.selected = {
+                        value: fakeSelect.options[index].value,
+                        text: fakeSelect.options[index].text
+                    }
+                }
+            }
 
             this.options.forEach(option => {
                 let instance = new OPTION({
