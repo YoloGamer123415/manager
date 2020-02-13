@@ -5,29 +5,26 @@
             'is-toggled': isToggled
         }"
     >
-        <a
-            href="#"
-            role="button"
-            class="side-button tasks"
+        <router-link
+            to="/tasks/new/"
+            class="side-button normal tasks"
         >
             <font-awesome-icon icon="tasks" class="icon" />
-        </a>
+        </router-link>
         
-        <a
-            href="#"
-            role="button"
-            class="side-button mail"
+        <router-link
+            to="/mail/new/"
+            class="side-button normal mail"
         >
             <font-awesome-icon icon="envelope-open" class="icon" />
-        </a>
+        </router-link>
         
-        <a
-            href="#"
-            role="button"
-            class="side-button agenda"
+        <router-link
+            to="/agenda/new/"
+            class="side-button normal agenda"
         >
             <font-awesome-icon icon="calendar-alt" class="icon" />
-        </a>
+        </router-link>
     
         <a
             href="#"

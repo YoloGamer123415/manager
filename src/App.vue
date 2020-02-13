@@ -43,6 +43,16 @@ export default {
         this.$ls.on('language', newLang => {
             this.$i18n.locale = newLang;
         });
+    },
+    mounted() {
+
+        // eslint-disable-next-line no-console
+        console.log(this);
+
+        this.$keystrokes.register('h', function () {
+            // eslint-disable-next-line no-console
+            console.log('yeet, op naar home');
+        })
     }
 }
 </script>

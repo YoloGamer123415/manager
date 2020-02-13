@@ -10,7 +10,8 @@ import theme from "@/plugins/theme";
 import fullscreen from "@/plugins/fullscreen";
 import notifications from "@/plugins/notifications";
 import contrastChecker from "@/plugins/contrastChecker";
-import http from "./plugins/http";
+import http from "@/plugins/http";
+import keystrokes from "@/plugins/keystrokes";
 
 const lsOptions = {
   namespace: 'manager__',
@@ -26,6 +27,7 @@ Vue.use(fullscreen);
 Vue.use(notifications);
 Vue.use(contrastChecker);
 Vue.use(http);
+Vue.use(keystrokes);
 
 // TODO: verander van localhost naar de goede website
 // Vue.prototype.$apiEndpoint = `http://192.168.2.9:8000/`;
