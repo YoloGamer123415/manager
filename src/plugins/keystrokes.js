@@ -6,25 +6,22 @@ export default {
                     patterns: [],
                     pressed: [],
                     clear: null,
-                    delay: 1000
+                    delay: 500
                 }
             },
             methods: {
                 /**
                  *
                  * @param {string} keyPattern
-                 * @param {(function): void} callback
+                 * @param {function: void} callback
                  */
                 register (keyPattern, callback = () => {}) {
-                    // eslint-disable-next-line no-console
-                    console.log('wtf');
-
                     if (
                         typeof keyPattern == "string" &&
                             typeof callback == "function"
                     ) {
                         this.patterns.push({
-                            pattern: keyPattern,
+                            keys: keyPattern,
                             callback
                         });
                     }
@@ -35,17 +32,29 @@ export default {
                     this.clear = null;
                 }
             },
-            mounted() {
-                document.onkeydown = function (e) {
-                    // eslint-disable-next-line no-console
-                    console.log(e.key);
-                    // this.pressed.push(e.key);
+            created() {
+                document.onkeydown = e => {
+                    this.pressed.push(e.key);
+
+                    let totalPresses = this.pressed.join('');
+
+                    this.patterns.forEach(pattern => {
+                        if (totalPresses === pattern.keys)
+                            pattern.callback();
+                    });
+
+                    if (this.clear) {
+                        clearInterval(this.clear);
+                        this.clear = null;
+                    }
+
+                    this.clear = setTimeout(() => {
+                        this.clearPresses();
+                    }, this.delay)
                 }
             }
         });
 
-        //eslint-disable-next-line no-console
-        console.log(Vue, Keystrokes);
-        Vue.constructor.$keystrokes = Keystrokes;
+        Vue.prototype.$keystrokes = Keystrokes;
     }
 }

@@ -45,14 +45,35 @@ export default {
         });
     },
     mounted() {
-
-        // eslint-disable-next-line no-console
-        console.log(this);
-
-        this.$keystrokes.register('h', function () {
-            // eslint-disable-next-line no-console
-            console.log('yeet, op naar home');
-        })
+        const keystrokes = [
+            {
+                key: 'h',
+                route: '/home/'
+            },
+            {
+                key: 'a',
+                route: '/agenda/'
+            },
+            {
+                key: 'm',
+                route: '/mail/'
+            },
+            {
+                key: 't',
+                route: '/tasks/'
+            },
+            {
+                key: 's',
+                route: '/settings/'
+            }
+        ];
+        
+        keystrokes.forEach(keystroke => {
+            this.$keystrokes.register(keystroke.key, () => {
+                if (this.$route.path !== keystroke.route)
+                    this.$router.push(keystroke.route);
+            })
+        });
     }
 }
 </script>
