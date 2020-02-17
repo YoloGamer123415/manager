@@ -15,30 +15,30 @@ export default {
     created() {
         const ELEMENT = Vue.extend(News);
 
-        this.$http.get(`/news`)
-            .then(res => {
-                let totalNews = res.data.length;
+        // this.$http.get(`/news`)
+        this.$news.get()
+            .then(news => {
+                let totalNews = news.length;
 
                 for (let i = 0; i < totalNews; i++) {
-                    let news = res.data.news[i];
+                    let newsItem = news[i];
                     let elem = document.createElement('div');
 
                     this.$refs.home.appendChild(elem);
 
                     let instance = new ELEMENT({
                         propsData: {
-                            image: news.image,
-                            title: news.title,
-                            text: news.description,
-                            url: news.url,
-                            author: news.author,
-                            source: news.source
+                            image: newsItem.image,
+                            title: newsItem.title,
+                            text: newsItem.description,
+                            url: newsItem.url,
+                            author: newsItem.author,
+                            source: newsItem.source
                         }
                     });
 
-                    instance.$mount(elem)
+                    instance.$mount(elem);
                 }
-
                 
                 this.$refs.loader.$emit('stop');
             })

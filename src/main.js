@@ -12,6 +12,7 @@ import notifications from "@/plugins/notifications";
 import contrastChecker from "@/plugins/contrastChecker";
 import http from "@/plugins/http";
 import keystrokes from "@/plugins/keystrokes";
+import news from "@/plugins/news";
 
 const lsOptions = {
   namespace: 'manager__',
@@ -21,13 +22,15 @@ const lsOptions = {
 library.add(fas);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 Vue.use(Storage, lsOptions);
+Vue.use(notifications);
+Vue.use(http);
 Vue.use(theme);
 Vue.use(fullscreen);
-Vue.use(notifications);
 Vue.use(contrastChecker);
-Vue.use(http);
 Vue.use(keystrokes);
+Vue.use(news);
 
 // TODO: verander van localhost naar de goede website
 // Vue.prototype.$apiEndpoint = `http://192.168.2.9:8000/`;
