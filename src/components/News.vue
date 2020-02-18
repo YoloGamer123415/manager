@@ -68,6 +68,7 @@ a.News {
     background-color: var(--current-theme-lighter);
     color: var(--current-theme-text) !important;
     border-radius: 5px;
+    text-decoration: none;
     
     @include desktop {
         box-shadow: 0 0 0 0 rgba(#000000, 0.5);
@@ -85,6 +86,10 @@ a.News {
 
     &:not(:last-of-type) {
         margin-bottom: 1.5em;
+    }
+
+    img {
+        max-width: 100%;
     }
 }
 </style>

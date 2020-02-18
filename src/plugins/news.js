@@ -58,26 +58,13 @@ export default {
                 },
                 get() {
                     return new Promise((resolve, reject) => {
-                        /* eslint-disable no-console */
-                        console.log(this.lastTimeFetched);
-                        console.log(this.refreshRate);
-                        console.log(Date.now());
-                        console.log(Math.ceil(this.lastTimeFetched + this.refreshRate));
-                        console.log(Date.now() > Math.ceil(this.lastTimeFetched + this.refreshRate));
-                        console.log(this.lastTimeFetched && Date.now() > Math.ceil(this.lastTimeFetched + this.refreshRate));
-
                         if (
                             this.lastTimeFetched &&
                                 Date.now() > Math.ceil(this.lastTimeFetched + this.refreshRate)
                         ) {
-                            // eslint-disable-next-line no-console
-                            console.log('fetch :(');
                             this._fetch()
                                 .then(res => {
-                                    if (!(
-                                        res &&
-                                            res.news
-                                    )) {
+                                    if (!(res && res.news)) {
                                         reject(`Something went wrong`);
                                     } else {
                                         this.news = res.news;
