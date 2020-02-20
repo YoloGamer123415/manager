@@ -80,10 +80,6 @@ a.News {
         }
     }
     
-    &:nth-child(even) {
-        background-color: var(--current-theme-darker);
-    }
-
     &:not(:last-of-type) {
         margin-bottom: 1.5em;
     }

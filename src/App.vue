@@ -81,7 +81,8 @@ export default {
 <style lang="scss">
 @import "assets/style/mixins";
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab&display=swap');
+//                                                            |Poppins
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 $gap: 1em;
 
@@ -107,11 +108,11 @@ $gap: 1em;
     padding: 0;
 }
 
-@for $i from 1 through 6 {
-    h#{$i} {
-        font-family: 'Roboto Slab', serif;
-    }
-}
+//@for $i from 1 through 6 {
+//    h#{$i} {
+//        font-family: 'Poppins', sans-serif;
+//    }
+//}
 
 html, body {
     width: 100vw;
@@ -159,7 +160,7 @@ html, body {
             'clock view' 1fr
             ' side view' 2fr
             'navigation view' auto
-            / 50% 50%;
+            / 35% 65%;
     }
     
     @include desktop {

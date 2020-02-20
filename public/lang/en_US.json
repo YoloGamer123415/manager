@@ -114,10 +114,16 @@
         "language": "Language",
         "theme": "Theme",
         "mainColor": "Main color",
-        "fullscreen": "Fullscreen"
+        "fullscreen": "Fullscreen",
+        "save-data": "Data saving"
     },
     "text": {
         "loading": "Bezig met laden",
-        "see-more": "See more"
+        "see-more": "See more",
+        "save-data": {
+            "title": "Data saving is {0}.",
+            "text": "This means that we won't collect the latest news.",
+            "on": "on"
+        }
     }
 }

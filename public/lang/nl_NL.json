@@ -114,10 +114,16 @@
         "language": "Taal",
         "theme": "Thema",
         "mainColor": "Hoofd kleur",
-        "fullscreen": "Volledig scherm"
+        "fullscreen": "Volledig scherm",
+        "save-data": "Databesparing"
     },
     "text": {
         "loading": "Bezig met laden",
-        "see-more": "Bekijk meer"
+        "see-more": "Bekijk meer",
+        "save-data": {
+            "title": "Databesparing staat {0}.",
+            "text": "Dit betekent dat we niet het laatste nieuws zullen verzamelen.",
+            "on": "aan"
+        }
     }
 }

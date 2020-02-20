@@ -50,16 +50,21 @@
             />
         </div>
         
-        <div class="setting language">
+        <div class="setting fullscreen">
             <label for="fullscreen">{{ $t('settings.fullscreen') }}:</label>
             <input type="checkbox" id="fullscreen" v-model="fullscreen">
-            
-            <br>
-            <br>
-            <br>
-            
-            <router-link to="/">Test page</router-link>
         </div>
+        
+        <div class="setting save-data">
+            <label for="save-data">{{ $t('settings.save-data') }}:</label>
+            <input type="checkbox" id="save-data" v-model="saveData">
+        </div>
+    
+        <br>
+        <br>
+        <br>
+    
+        <router-link to="/">Test page</router-link>
     </div>
 </template>
 
@@ -78,7 +83,8 @@ export default {
             selectedLanguage: this.$i18n.locale,
             selectedTheme: this.$theme.current,
             mainColor: this.$theme.mainColor,
-            fullscreen: this.$fullscreen.isFullscreen
+            fullscreen: this.$fullscreen.isFullscreen,
+            saveData: Boolean(this.$ls.get('save-data'))
         }
     },
     methods: {
@@ -102,6 +108,9 @@ export default {
     watch: {
         fullscreen: function (isFullscreen) {
             this.$fullscreen.toggle(true, isFullscreen);
+        },
+        saveData: function (saveData) {
+            this.$ls.set('save-data', saveData);
         }
     }
 }
