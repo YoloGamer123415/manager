@@ -8,20 +8,20 @@
  * @property {string | null} source
  */
 
-// class NewsItems {
-//     /**
-//      *
-//      * @param {NewsItemsOptions} options
-//      */
-//     constructor(options) {
-//         this.image  = options.image;
-//         this.title  = options.title;
-//         this.text   = options.text;
-//         this.url    = options.url;
-//         this.author = options.author;
-//         this.source = options.source;
-//     }
-// }
+class NewsItems {
+    /**
+     *
+     * @param {NewsItemsOptions} options
+     */
+    constructor(options) {
+        this.image  = options.image;
+        this.title  = options.title;
+        this.text   = options.text;
+        this.url    = options.url;
+        this.author = options.author;
+        this.source = options.source;
+    }
+}
 
 export default {
     install(Vue) {
@@ -67,7 +67,13 @@ export default {
                                     if (!(res && res.news)) {
                                         reject(`Something went wrong`);
                                     } else {
-                                        this.news = res.news;
+                                        let temp = [];
+
+                                        res.news.forEach(item => {
+                                            temp.push( new NewsItems(item) );
+                                        });
+
+                                        this.news = temp;
                                         this.lastTimeFetched = Date.now();
                                         resolve(this.news);
                                     }
