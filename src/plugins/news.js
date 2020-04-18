@@ -31,7 +31,7 @@ export default {
                     /**
                      * @type {number}
                      */
-                    lastTimeFetched: 1,
+                    lastTimeFetched: 0,
                     /**
                      * @type {NewsItems[]}
                      */
