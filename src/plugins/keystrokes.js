@@ -3,7 +3,7 @@ export default {
         const Keystrokes = new Vue({
             data() {
                 return {
-                    patterns: [],
+                    patterns: new Map(),
                     pressed: [],
                     clear: null,
                     delay: 500
@@ -11,20 +11,28 @@ export default {
             },
             methods: {
                 /**
-                 *
+                 * Register a keypress pattern to watch.
+                 * 
                  * @param {string} keyPattern
                  * @param {function: void} callback
                  */
-                register (keyPattern, callback = () => {}) {
+                register(keyPattern, callback = () => {}) {
                     if (
                         typeof keyPattern == "string" &&
                             typeof callback == "function"
                     ) {
-                        this.patterns.push({
-                            keys: keyPattern,
-                            callback
-                        });
+                        this.patterns.set(keyPattern, callback)
                     }
+                },
+
+
+                /**
+                 * Remove a keypress pattern.
+                 *
+                 * @param {string} keyPattern
+                 */
+                remove(keyPattern) {
+                    this.patterns.delete(keyPattern);
                 },
 
                 clearPresses () {
@@ -38,10 +46,8 @@ export default {
 
                     let totalPresses = this.pressed.join('');
 
-                    this.patterns.forEach(pattern => {
-                        if (totalPresses === pattern.keys)
-                            pattern.callback();
-                    });
+                    if (this.patterns.has(totalPresses))
+                        ( this.patterns.get(totalPresses) )();
 
                     if (this.clear) {
                         clearInterval(this.clear);
