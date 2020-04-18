@@ -107,7 +107,8 @@
     },
     "time": {
         "day": "{day} {month} {dayN}, {year}",
-        "time": "{hours}:{minutes}:{seconds}"
+        "time": "{hours}:{minutes}:{seconds}",
+        "calendar": "{hours}:{minutes}"
     },
     "settings": {
         "title": "Settings",

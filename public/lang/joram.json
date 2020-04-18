@@ -87,6 +87,7 @@
         }
     },
     "time": {
-        "day": "{day} {dayN} {month} {year}"
+        "day": "{day} {dayN} {month} {year}",
+        "calendar": "{hours}u{minutes}"
     }
 }

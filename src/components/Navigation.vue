@@ -1,6 +1,6 @@
 <template>
     <div id="Navigation">
-        <router-link to="/home" class="link normal home">
+        <router-link to="/home/" class="link normal home">
             <div class="icon">
                 <font-awesome-icon icon="home" />
             </div>
@@ -10,7 +10,7 @@
             </div>
         </router-link>
     
-        <router-link to="/agenda" class="link normal agenda">
+        <router-link :to="`/agenda/?day=${encodeURIComponent( (new Date).toISOString() )}`" class="link normal agenda">
             <div class="icon">
                 <font-awesome-icon icon="calendar-alt" />
             </div>
@@ -20,7 +20,7 @@
             </div>
         </router-link>
     
-        <router-link to="/mail" class="link normal mail">
+        <router-link to="/mail/" class="link normal mail">
             <div class="icon">
                 <font-awesome-icon icon="envelope-open" />
             </div>
@@ -30,7 +30,7 @@
             </div>
         </router-link>
     
-        <router-link to="/tasks" class="link normal tasks">
+        <router-link to="/tasks/" class="link normal tasks">
             <div class="icon">
                 <font-awesome-icon icon="tasks" />
             </div>
@@ -40,7 +40,7 @@
             </div>
         </router-link>
         
-        <router-link to="/settings" class="link normal settings">
+        <router-link to="/settings/" class="link normal settings">
             <div class="icon">
                 <font-awesome-icon icon="cog" />
             </div>

@@ -52,7 +52,7 @@ export default {
             },
             {
                 key: 'a',
-                route: '/agenda/'
+                route: `/agenda/?day=${encodeURIComponent( (new Date).toISOString() )}/`
             },
             {
                 key: 'm',
