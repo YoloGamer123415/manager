@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import axios, { AxiosPromise, AxiosRequestConfig } from "axios";
 
-const apiEndpoint = 'http://localhost:8000';
-const corsProxy = 'http://0.0.0.0:8001';
+// const Vue.prototype.$apiEndpoint = 'http://localhost:8000';
+// const Vue.prototype.$corsProxy = 'http://0.0.0.0:8001';
 
 export default {
     install(Vue) {
@@ -53,7 +53,7 @@ export default {
                         temp.headers = {};
 
                     temp.method = requestType;
-                    temp.url = `${corsProxy}/${apiEndpoint}/${url.replace(/^\//, '')}`;
+                    temp.url = `${Vue.prototype.$corsProxy}/${Vue.prototype.$apiEndpoint}/${url.replace(/^\//, '')}`;
                     temp.headers['x-token'] = this.token;
 
                     return temp;
