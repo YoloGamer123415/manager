@@ -27,7 +27,6 @@
         </router-link>
     
         <a
-            href="#"
             role="button"
             class="main-button"
             @click="mainClick"
