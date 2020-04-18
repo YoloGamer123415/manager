@@ -4,7 +4,11 @@
             <BusyBar :hours="hours" :is-today="isToday" />
         </div>
 
-        <div class="day" v-text="$t(day)" />
+        <div
+            class="day"
+            :class="{ today: isToday }"
+            v-text="$t(day)"
+        />
     </div>
 </template>
 
@@ -47,6 +51,10 @@ div#BusyBarWrapper {
         display: flex;
         align-items: flex-end;
         justify-content: center;
+
+        &:not(.today) {
+            opacity: .5;
+        }
     }
 }
 </style>
