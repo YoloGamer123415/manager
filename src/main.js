@@ -15,6 +15,7 @@ import http from "@/plugins/http";
 import keystrokes from "@/plugins/keystrokes";
 import news from "@/plugins/news";
 import agenda from "@/plugins/agenda";
+import mail from "@/plugins/mail";
 
 const lsOptions = {
   namespace: 'manager__',
@@ -39,6 +40,7 @@ Vue.use(contrastChecker);
 Vue.use(keystrokes);
 Vue.use(news);
 Vue.use(agenda);
+Vue.use(mail);
 
 Vue.config.productionTip = false;
 

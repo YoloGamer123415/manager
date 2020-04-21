@@ -124,6 +124,11 @@
             "title": "Databesparing staat {0}.",
             "text": "Dit betekent dat we niet het laatste nieuws zullen verzamelen.",
             "on": "aan"
+        },
+        "mail": {
+            "from": "van",
+            "mark": "Markeer allemaal als gelezen.",
+            "unread": "{total} ongelezen emails."
         }
     }
 }

@@ -108,7 +108,11 @@
     "time": {
         "day": "{day} {month} {dayN}, {year}",
         "time": "{hours}:{minutes}:{seconds}",
-        "calendar": "{hours}:{minutes}"
+        "calendar": "{hours}:{minutes}",
+        "mail": {
+            "short": "{month} {dayN}",
+            "full": ""
+        }
     },
     "settings": {
         "title": "Settings",
@@ -125,6 +129,11 @@
             "title": "Data saving is {0}.",
             "text": "This means that we won't collect the latest news.",
             "on": "on"
+        },
+        "mail": {
+            "from": "from",
+            "mark": "Mark all as read.",
+            "unread": "{total} unread emails."
         }
     }
 }
