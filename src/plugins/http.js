@@ -53,7 +53,7 @@ export default {
                         temp.headers = {};
 
                     temp.method = requestType;
-                    temp.url = `${Vue.prototype.$corsProxy}/${Vue.prototype.$apiEndpoint}/${url.replace(/^\//, '')}`;
+                    temp.url = `${Vue.prototype.$corsProxy.replace(/\/+$/g, '')}/${Vue.prototype.$apiEndpoint.replace(/\/+$/g, '')}/${url.replace(/^\//, '')}`;
                     temp.headers['x-token'] = this.token;
 
                     return temp;
