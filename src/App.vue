@@ -8,7 +8,10 @@
         
         <Clock class="clock" />
 
-        <div class="side"></div>
+        <div class="side">
+            width: {{ width }}.<br>
+            height: {{ height }}.
+        </div>
         
         <Navigation class="navigation" />
         
@@ -32,6 +35,17 @@ export default {
         Notifications,
         Clock,
         Navigation
+    },
+    data() {
+        // TODO: remove later
+        return {
+            width: window.innerWidth
+                || document.documentElement.clientWidth
+                || document.body.clientWidth,
+            height: window.innerHeight
+                || document.documentElement.clientHeight
+                || document.body.clientHeight
+        }
     },
     created() {
         this.$http.setToken('TestToken');
@@ -124,11 +138,15 @@ html, body {
 
 #app {
     display: grid;
-    
     gap: $gap;
-    width: calc(100% - 2 * #{$gap});
+    width: 100%;
     height: calc(100% - 2 * #{$gap});
-    padding: $gap 0 $gap $gap;
+    padding: $gap 0;
+
+    @include tabletAndDesktop {
+        width: calc(100% - 2 * #{$gap});
+        padding: $gap 0 $gap $gap;
+    }
 
     @include phone {
         &.isHome {
