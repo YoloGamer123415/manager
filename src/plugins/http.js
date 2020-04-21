@@ -46,6 +46,8 @@ export default {
                 parseOptions (options, url, requestType = 'get') {
                     let temp = options;
 
+                    temp.validateStatus = false;
+
                     if (!temp)
                         temp = {};
 
@@ -62,11 +64,11 @@ export default {
                 /**
                  *
                  * @param {string} url
-                 * @param {AxiosRequestConfig} options
+                 * @param {AxiosRequestConfig} [options]
                  * @param {function(code: number): boolean} valid
                  * @return {AxiosPromise}
                  */
-                get (url, options, valid = this.validFunction) {
+                get (url, options = {}, valid = this.validFunction) {
                     return new Promise((resolve, reject) => {
                         this.request(
                             this.parseOptions(options, url, 'get')
@@ -83,11 +85,11 @@ export default {
                 /**
                  *
                  * @param {string} url
-                 * @param {AxiosRequestConfig} options
+                 * @param {AxiosRequestConfig} [options]
                  * @param {function(code: number): boolean} valid
                  * @return {AxiosPromise}
                  */
-                post (url, options, valid = this.validFunction) {
+                post (url, options = {}, valid = this.validFunction) {
                     return new Promise((resolve, reject) => {
                         this.request(
                             this.parseOptions(options, url, 'post')
