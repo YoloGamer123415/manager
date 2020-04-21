@@ -4,43 +4,43 @@
             class="fullscreen"
             ref="fullscreen"
             :style="{
-                '--Appointment-color-foreground': color.foreground || color.background,
-                '--Appointment-color-background': color.background
+                '--Appointment-color-foreground': view.color.foreground || view.color.background,
+                '--Appointment-color-background': view.color.background
             }"
             @click="fullscreen()"
         >
             <div class="fullscreen-inner">
-                <h1 v-text="title" />
+                <h1 v-text="view.title" />
 
                 <div class="time">
                     <div class="icon">
                         <font-awesome-icon :icon="['far', 'clock']" />
                     </div>
 
-                    <p class="text" v-text="time" />
+                    <p class="text" v-text="view.time" />
                 </div>
 
-                <div v-if="location" class="location">
+                <div v-if="view.location" class="location">
                     <div class="icon">
                         <font-awesome-icon icon="map-marker-alt" />
                     </div>
 
-                    <p class="text" v-text="location" />
+                    <p class="text" v-text="view.location" />
                 </div>
 
-                <div v-if="description" class="description">
+                <div v-if="view.description" class="description">
                     <div class="i">
                         <font-awesome-icon icon="align-left" />
                     </div>
 
-                    <p class="text" v-text="description" />
+                    <p class="text" v-text="view.description" />
                 </div>
             </div>
         </div>
 
-        <Column />
-        <Column />
-        <Column />
+        <Column class="column-1" :appointments="appointments.today" />
+        <Column class="column-2" :appointments="appointments.tomorrow" />
+        <Column class="column-3" :appointments="appointments.dayAfterTomorrow" />
     </div>
 </template>
 
@@ -54,18 +54,23 @@ export default {
     data() {
         return {
             scrollPos: { locked: false, y: 0 },
-            title: null,
-            description: null,
-            location: null,
-            time: null,
-            color: {
-                foreground: null,
-                background: null
-            }
+            view: {
+                title: null,
+                description: null,
+                location: null,
+                time: null,
+                color: {
+                    foreground: null,
+                    background: null
+                }
+            },
+            appointments: {
+                today: [],
+                tomorrow: [],
+                dayAfterTomorrow: []
+            },
+            selectedCalendars: ['jorambuitenhuis@gmail.com']
         }
-    },
-    mounted() {
-        EventBus.on('appointment-fullscreen', this.fullscreen);
     },
     methods: {
         toggleScroll() {
@@ -118,11 +123,11 @@ export default {
             } else {
                 fullscreen.classList.add('open');
 
-                this.title = data.title;
-                this.description = data.description;
-                this.location = data.location;
-                this.time = this.formatTime(data.time);
-                this.color = data.color;
+                this.view.title = data.title;
+                this.view.description = data.description;
+                this.view.location = data.location;
+                this.view.time = this.formatTime(data.time);
+                this.view.color = data.color;
 
                 this.$keystrokes.register('Escape', () => {
                     this.$keystrokes.remove('Escape');
@@ -131,11 +136,42 @@ export default {
                 });
             }
         }
+    },
+    async created() {
+        // TODO: [API] verander de kleuren. Backcolor van calendar en backcolor van appointment.
+        const TODAY = new Date();
+        const DAYS = ['today', 'tomorrow', 'dayAfterTomorrow'];
+
+        try {
+            // TODO: kijk of het wel echt 3 keer moet (tel enz)
+            for (let i = 0; i < 3; i++) {
+                let startDate = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate() + i);
+                let endDate = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate() + i + 1);
+                let calendars = await this.$agenda.getAppointments(startDate, endDate);
+
+                // TODO: make filters
+                this.appointments[ DAYS[i] ] = calendars.filter(c => this.selectedCalendars.includes(c.id) )[0].appointments;
+            }
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.warn(e);
+
+            this.$notifications.newNotification({
+                type: 'error',
+                key: 'unknown'
+            });
+        }
+    },
+    mounted() {
+        EventBus.on('appointment-fullscreen', this.fullscreen);
+        // TODO: voeg het tijdaangeef lijntje toe en scroll er naar toe
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import "src/assets/style/mixins";
+
 div#Agenda {
     position: relative;
     display: flex;
@@ -177,14 +213,19 @@ div#Agenda {
         */
         div.fullscreen-inner {
             position: relative;
-            width: 35%;
-            max-height: 75%;
+            width: 100%;
+            max-height: 100%;
             padding: 1em 1em 1em 1.2em;
             background-color: var(--current-theme-lighter);
             color: var(--current-theme-text);
             box-shadow: 1px 3px 5px rgba($color: #000000, $alpha: .25);
             border-radius: 0 .2em .2em 0;
             overflow: auto;
+
+            @include tabletAndDesktop {
+                width: 35%;
+                max-height: 75%;
+            }
 
             &::before {
                 content: '';
@@ -222,6 +263,28 @@ div#Agenda {
                 display: grid;
                 grid-template-columns: 1.5em auto;
             }
+        }
+    }
+
+    div.column-1 {
+        display: block;
+    }
+
+    div.column-2,
+    div.column-3 {
+        display: none;
+    }
+
+    @include tablet {
+        div.column-2 {
+            display: block;
+        }
+    }
+
+    @include desktop {
+        div.column-2,
+        div.column-3 {
+            display: block;
         }
     }
 }

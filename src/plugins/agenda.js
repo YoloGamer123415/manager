@@ -14,6 +14,8 @@
  * @typedef {Object} AppointmentOptions
  * @property {String} id
  * @property {String} title
+ * @property {String} location
+ * @property {String} description
  * @property {Color} color
  * @property {Time} time
  */
@@ -27,6 +29,8 @@
  * @property {Color} color
  */
 
+const HOUR_HEIGHT = 200;
+
 class Appointment {
     /**
      * Creates an instance of Appointment.
@@ -37,8 +41,12 @@ class Appointment {
     constructor(options) {
         this.id = options.id;
         this.title = options.title;
+        this.location = options.location;
+        this.description = options.description;
         this.color = options.color;
-        this.time = options.time;
+        this.time = {};
+        this.time.start = new Date(options.time.start);
+        this.time.end = new Date(options.time.end)
     }
 }
 
@@ -90,10 +98,13 @@ export default {
                      * @type {Number}
                      * @todo Check if data saving is toggled. If so, make delay longer (10 mins or something along those lines).
                      */
-                    refreshRate: 1000 * 1
+                    refreshRate: 1000 * 1,
+                    /**
+                     * @type {Number}
+                     */
+                    HOUR_HEIGHT: HOUR_HEIGHT
                 }
             },
-
             methods: {
                 _fetch(uri) {
                     return new Promise((resolve, reject) => {
@@ -113,7 +124,6 @@ export default {
                                  * @type {Map<String, Calendar>}
                                  */
                                 let temp = new Map();
-
                                 res.calendars.forEach(item => {
                                     temp.set(item.id, new Calendar(item) );
                                 });
@@ -129,38 +139,34 @@ export default {
                 /**
                  * @param {Date} [startDate]
                  * @param {Date} [endDate]
-                 * @returns
+                 * @returns {Calendar[]}
                  */
                 getAppointments(startDate, endDate) {
                     return new Promise((resolve, reject) => {
+                        // TODO: al deze if statements werken vlgns mij ook niet.
+                        // TODO: moet een rewrite met check of de dagen al bestaan en het anders opslaan (per dag)
                         if ( Date.now() > Math.ceil(this.lastTimeFetched + this.refreshRate) ) {
                             this._getCalendars()
-                                .then(() => {
-                                    let uri = startDate
-                                        ? (
-                                            `${startDate.toISOString()}/` + endDate
-                                                ? `${endDate.toISOString()}/`
-                                                : ''
-                                        )
-                                        : '';
+                                .then(async () => {
+                                    let uri = startDate ? `${startDate.toISOString()}/` : '';
+                                    uri += endDate ? `${endDate.toISOString()}/` : '';
+
+                                    let keys = [ ...this.calendars.keys() ];
 
                                     // TODO: maybe rewrite with Promise.all() ?
-                                    this.calendars.forEach(async calendarId => {
+                                    for (let i = 0; i < keys.length; i++) {
                                         try {
-                                            let res = await this._fetch(`/appointments/${calendarId}/${uri}`)
+                                            let calendar = this.calendars.get( keys[i] );
+                                            
+                                            let res = await this._fetch(`/appointments/${encodeURIComponent(calendar.id)}/${uri}`)
                                             res.appointments.forEach(item => {
-                                                /**
-                                                 * @type {Calendar | null}
-                                                 */
-                                                let calendar = this.calendars.get(item.id);
-                                                
                                                 if (calendar)
                                                     calendar.addAppointment( new Appointment(item) );
                                             });
                                         } catch (err) {
                                             reject(err);
                                         }
-                                    });
+                                    }
 
                                     resolve([ ...this.calendars.values() ]);
                                 })

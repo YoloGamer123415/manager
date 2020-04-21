@@ -38,16 +38,13 @@
                 <font-awesome-icon icon="align-left" />
             </div>
 
-            <p class="text" v-text="description" />
+            <p class="text" v-html="description" />
         </div>
     </div>
 </template>
 
 <script>
 import EventBus from "@/EventBus";
-
-const HOUR_HEIGHT = 250;
-const MINUTE_HEIGHT_MODIFIER = HOUR_HEIGHT / 60;
 
 export default {
     name: 'Appointment',
@@ -68,6 +65,11 @@ export default {
         time: {
             start: Date,
             end: Date
+        }
+    },
+    data() {
+        return {
+            MINUTE_HEIGHT_MODIFIER: this.$agenda.HOUR_HEIGHT / 60
         }
     },
     methods: {
@@ -101,7 +103,7 @@ export default {
             let minutes = this.time.start.getMinutes();
             let totalMinutes = hours * 60 + minutes;
 
-            return totalMinutes * MINUTE_HEIGHT_MODIFIER;
+            return totalMinutes * this.MINUTE_HEIGHT_MODIFIER;
         }, 
 
         getCorrectHeight() {
@@ -109,7 +111,7 @@ export default {
             let minutes = this.time.end.getMinutes() - this.time.start.getMinutes();
             let totalMinutes = hours * 60 + minutes;
 
-            return totalMinutes * MINUTE_HEIGHT_MODIFIER;
+            return totalMinutes * this.MINUTE_HEIGHT_MODIFIER;
         },
 
         fullscreen() {
