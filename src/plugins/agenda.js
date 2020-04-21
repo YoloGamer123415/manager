@@ -133,10 +133,7 @@ export default {
                  */
                 getAppointments(startDate, endDate) {
                     return new Promise((resolve, reject) => {
-                        if (
-                            this.lastTimeFetched &&
-                                Date.now() > Math.ceil(this.lastTimeFetched + this.refreshRate)
-                        ) {
+                        if ( Date.now() > Math.ceil(this.lastTimeFetched + this.refreshRate) ) {
                             this._getCalendars()
                                 .then(() => {
                                     let uri = startDate

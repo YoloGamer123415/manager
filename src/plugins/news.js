@@ -58,10 +58,7 @@ export default {
                 },
                 get() {
                     return new Promise((resolve, reject) => {
-                        if (
-                            this.lastTimeFetched &&
-                                Date.now() > Math.ceil(this.lastTimeFetched + this.refreshRate)
-                        ) {
+                        if ( Date.now() > Math.ceil(this.lastTimeFetched + this.refreshRate) ) {
                             this._fetch()
                                 .then(res => {
                                     if (!(res && res.news)) {
