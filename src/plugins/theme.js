@@ -13,11 +13,13 @@ export default {
         const currentTheme = window.localStorage.getItem(`manager__theme`);
         const currentMainColor = window.localStorage.getItem(`manager__main-color`);
         const Theme = new Vue({
-            data: {
-                current: currentTheme ? JSON.parse(currentTheme).value : 'dark',
-                mainColor: currentMainColor ? JSON.parse(currentMainColor).value : defaultMainColor,
-                defaultMainColor,
-                availableThemes
+            data() {
+                return {
+                    current: currentTheme ? JSON.parse(currentTheme).value : 'dark',
+                    mainColor: currentMainColor ? JSON.parse(currentMainColor).value : defaultMainColor,
+                    defaultMainColor,
+                    availableThemes
+                }
             },
             watch: {
                 current: {

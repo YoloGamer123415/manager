@@ -1,9 +1,10 @@
 $color-main: #00E6E6;
+$color-light: #ffffff;
 $color-dark: #252525;
 $color-error: #ef5350;
 $color-success: #4caf50;
 
-$percentage: 5%;
+$percentage: 10%;
 
 :root {
   --color-agenda: #1A73E8;
@@ -15,15 +16,15 @@ $percentage: 5%;
   --color-success: #{$color-success};
   --color-inactive: #aaaaaa;
 
-  --theme-light-lighter: #{lighten(#ffffff, $percentage)};
-  --theme-light-darken: #{darken(#ffffff, $percentage)};
+  --theme-light-lighter: #{lighten($color-light, $percentage)};
+  --theme-light-darker: #{darken($color-light, $percentage)};
   --theme-light-text: #{$color-dark};
-  --theme-light-background: #ffffff;
+  --theme-light-background: #{$color-light};
   --theme-light-scrollbar: #bbbbbb;
 
   --theme-dark-lighter: #{lighten($color-dark, $percentage)};
   --theme-dark-darker: #{darken($color-dark, $percentage)};
-  --theme-dark-text: #ffffff;
+  --theme-dark-text: #{$color-light};
   --theme-dark-background: #{$color-dark};
   --theme-dark-scrollbar: #444444;
 

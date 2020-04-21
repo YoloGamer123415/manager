@@ -9,7 +9,8 @@
             '--Appointment-color-background': color.background,
 
             top: `${getCorrectOffset()}px`,
-            height: `${getCorrectHeight()}px`
+            height: `${getCorrectHeight()}px`,
+            'background-color': $theme.current === 'dark' ? 'var(--current-theme-lighter)' : 'var(--current-theme-darker)'
         }"
         :data-time="getTimeShort()"
         @click="fullscreen()"
@@ -134,9 +135,8 @@ div.Appointment {
     position: absolute;
     width: calc(100% - #{$width} - 3 * #{$padding}); // a third time because the elements get a margin left from the Column
     padding: $padding / 2 $padding;
-    background-color: var(--current-theme-lighter);
     color: var(--current-theme-text);
-    border-radius: .2em;
+    border-radius: .3em;
     cursor: pointer;
 
     // TODO: plak dat stomme lijntje er op een of andere manier er in

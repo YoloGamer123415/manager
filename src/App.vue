@@ -118,6 +118,7 @@ html, body {
     width: 100vw;
     height: 100vh;
     background-color: var(--current-theme-background);
+    color: var(--current-theme-text);
     transition: background-color .3s ease;
 }
 
