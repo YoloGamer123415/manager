@@ -1,25 +1,26 @@
-import Vue from 'vue'
-import App from './App.vue'
-import Storage from "vue-ls";
-import {library} from "@fortawesome/fontawesome-svg-core";
-import {fas} from "@fortawesome/free-solid-svg-icons";
-import {far} from "@fortawesome/free-regular-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
-import router from "@/router";
-import i18n from "@/plugins/i18n";
-import theme from "@/plugins/theme";
-import fullscreen from "@/plugins/fullscreen";
-import notifications from "@/plugins/notifications";
-import contrastChecker from "@/plugins/contrastChecker";
-import http from "@/plugins/http";
-import keystrokes from "@/plugins/keystrokes";
-import news from "@/plugins/news";
-import agenda from "@/plugins/agenda";
-import mail from "@/plugins/mail";
+import Vue from 'vue';
+import App from './App.vue';
+import Storage from 'vue-ls';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import router from '@/router';
+import i18n from '@/plugins/i18n';
+import theme from '@/plugins/theme';
+import fullscreen from '@/plugins/fullscreen';
+import notifications from '@/plugins/notifications';
+import contrastChecker from '@/plugins/contrastChecker';
+import http from '@/plugins/http';
+import keystrokes from '@/plugins/keystrokes';
+import news from '@/plugins/news';
+import agenda from '@/plugins/agenda';
+import mail from '@/plugins/mail';
+import tasks from '@/plugins/tasks';
 
 const lsOptions = {
-  namespace: 'manager__',
-  storage: 'local'
+    namespace: 'manager__',
+    storage: 'local',
 };
 
 library.add(fas, far);
@@ -41,11 +42,12 @@ Vue.use(keystrokes);
 Vue.use(news);
 Vue.use(agenda);
 Vue.use(mail);
+Vue.use(tasks);
 
 Vue.config.productionTip = false;
 
 new Vue({
-  i18n,
-  router,
-  render: h => h(App),
+    i18n,
+    router,
+    render: (h) => h(App),
 }).$mount('#app');
