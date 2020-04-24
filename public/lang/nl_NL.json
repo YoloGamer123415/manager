@@ -95,7 +95,7 @@
         
         },
         "info": {
-        
+            "notImplemented": "Deze functie is nog niet geïmplementeerd."
         }
     },
     "navigation": {
@@ -107,7 +107,12 @@
     },
     "time": {
         "day": "{day} {dayN} {month} {year}",
-        "time": "{hours}:{minutes}:{seconds}"
+        "time": "{hours}:{minutes}:{seconds}",
+        "mail": {
+            "short": "{dayN} {month}",
+            "full": ""
+        },
+        "tasks": "{day} {dayN} {month}, {hours}:{minutes}"
     },
     "settings": {
         "title": "Instellingen",

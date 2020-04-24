@@ -95,7 +95,7 @@
         
         },
         "info": {
-            "test": "Goeie test notifictie ofzo, idk :)"
+            "notImplemented": "This function has not yet been implemented."
         }
     },
     "navigation": {
@@ -112,7 +112,8 @@
         "mail": {
             "short": "{month} {dayN}",
             "full": ""
-        }
+        },
+        "tasks": "{day} {month} {dayN}, {hours}:{minutes}"
     },
     "settings": {
         "title": "Settings",

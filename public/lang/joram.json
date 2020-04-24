@@ -91,6 +91,7 @@
         "calendar": "{hours}u{minutes}",
         "mail": {
             "short": "{dayN} {month}"
-        }
+        },
+        "tasks": "{day} {dayN} {month}, {hours}u{minutes}"
     }
 }
