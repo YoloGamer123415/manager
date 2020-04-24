@@ -6,11 +6,27 @@
         }"
         @click="clicked()"
     >
-        <h1 class="subject" v-text="subject" />
+        <p class="subject" v-text="subject" />
+
+        <div v-if="files.length > 0" class="files">
+            <span
+                v-for="file in files"
+                :key="file.id"
+                class="file"
+            >
+                <font-awesome-icon :icon="['far', 'file']" class="icon" />
+
+                {{ file.name }}
+            </span>
+        </div>
 
         <p class="received" v-text="formatReveived()" />
 
-        <p class="short" v-text="short" />
+        <p
+            v-if="preview"
+            class="short"
+            v-html="`${preview}...`"
+        />
 
         <p class="from" v-html="formatFrom()" />
     </div>
@@ -40,10 +56,6 @@ export default {
             type: String,
             required: true
         },
-        short: {
-            type: String,
-            required: true
-        },
         received: {
             type: Date,
             required: true
@@ -51,7 +63,15 @@ export default {
         from: {
             type: Object,
             required: true
-        }
+        },
+        preview: {
+            type: String,
+            required: false
+        },
+        files: {
+            type: Array,
+            required: true
+        },
     },
     methods: {
         formatReveived() {
@@ -98,5 +118,25 @@ div.MailItem {
     padding: 1em;
     border-radius: .3em;
     cursor: pointer;
+
+    p.subject {
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    div.files {
+        margin: 1em 0;
+        font-size: .75em;
+
+        span.file {
+            padding: .25em 1em;
+            border: .1em solid #aaaaaa;
+            border-radius: 100px;
+
+            .icon {
+                margin-right: .3em;
+            }
+        }
+    }
 }
 </style>

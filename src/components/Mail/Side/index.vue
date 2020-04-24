@@ -40,7 +40,9 @@ export default {
 <style lang="scss" scoped>
 div.MailSide {
     div.info {
-        display: inline-block;
+        position: sticky;
+        top: 0;
+        display: table;
         width: calc(100% - 2 * 1em);
         padding: .5em 1em;
         background-color: var(--current-theme-darker);

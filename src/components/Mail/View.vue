@@ -2,9 +2,22 @@
     <div class="MailView">
         <div class="info">
             <h1 class="subject" v-text="subject" />
+
+            <div v-if="message.files.length > 0" class="files">
+                <span
+                    v-for="file in message.files"
+                    :key="file.id"
+                    class="file"
+                    @click="downloadFile(file.id)"
+                >
+                    <font-awesome-icon :icon="['far', 'file']" class="icon" />
+
+                    {{ file.name }}
+                </span>
+            </div>
         </div>
 
-        <div class="text" v-html="message.html" />
+        <div class="text" v-html="message.html || message.text" />
     </div>
 </template>
 
@@ -24,9 +37,10 @@ export default {
             },
             subject: null,
             message: {
-                short: null,
+                preview: null,
                 text: null,
-                html: null
+                html: null,
+                files: []
             }
         }
     },
@@ -48,13 +62,18 @@ export default {
             res += DELIM[1];
 
             return res;
+        },
+
+        downloadFile() {
+            this.$notifications.newNotification({
+                type: 'info',
+                key: 'notImplemented'
+            });
         }
     },
     mounted() {
         EventBus.on('mail-view', id => {
             let mail = this.$mail.getMail(id);
-            // eslint-disable-next-line no-console
-            console.log(mail);
 
             this.id = id;
             this.received = mail.received;
@@ -68,7 +87,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "src/assets/style/mixins";
+
 div.MailView {
-    background-color: blue;
+    height: calc(100% - 2 * 1em);
+
+    div.info {
+        
+
+        div.files {
+            margin: 1em 0;
+            font-size: .75em;
+            user-select: none;
+    
+            span.file {
+                padding: .25em 1em;
+                border: .1em solid #aaaaaa;
+                border-radius: 100px;
+                cursor: pointer;
+    
+                .icon {
+                    margin-right: .3em;
+                }
+    
+                @include desktop {
+                    transition: border-color .3s ease;
+    
+                    &:hover {
+                        border-color: var(--color-main);
+                    }
+                }
+            }
+        }
+    }
+
+    div.text {
+        background-color: var(--theme-light-background);
+    }
 }
 </style>

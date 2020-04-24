@@ -9,10 +9,18 @@
  */
 
 /**
+ * @typedef {Object} FileOptions
+ * @property {String} name
+ * @property {String} mimeType
+ * @property {String} id
+ */
+
+/**
  * @typedef {Object} Message
  * @property {String} short
- * @property {Base64} text
- * @property {Base64} html
+ * @property {String} text
+ * @property {String} html
+ * @property {File[]} files
  */
 
 /**
@@ -26,6 +34,20 @@
  * @property {Message} message
  */
 
+class File {
+    /**
+     * Creates an instance of File.
+     * 
+     * @param {FileOptions} options
+     * @memberof File
+     */
+    constructor(options) {
+        this.name = options.name;
+        this.mimeType = options.mimeType;
+        this.id = options.id;
+    }
+}
+
 class MailItem {
     /**
      * Creates an instance of Mail.
@@ -34,16 +56,17 @@ class MailItem {
      * @memberof Mail
      */
     constructor(options) {
-        this.id            = options.id;
-        this.labelIds      = options.labelIds;
-        this.received      = new Date(options.received);
-        this.to            = options.to;
-        this.from          = options.from;
-        this.subject       = options.subject;
-        this.message = {};
-        this.message.short = options.message.short;
-        this.message.text  = atob(options.message.text || '');
-        this.message.html  = atob(options.message.html || '');
+        this.id              = options.id;
+        this.labelIds        = options.labelIds;
+        this.received        = new Date(options.received);
+        this.to              = options.to;
+        this.from            = options.from;
+        this.subject         = options.subject;
+        this.message         = {};
+        this.message.preview = options.message.preview;
+        this.message.text    = options.message.text;
+        this.message.html    = options.message.html;
+        this.message.files   = options.message.files.map(f => new File(f) );
     }
 }
 
@@ -96,19 +119,17 @@ export default {
                     return new Promise((resolve, reject) => {
                         if ( Date.now() > Math.ceil(this.lastTimeFetched + this.refreshRate) ) {
                             this._getUnreadMailIds()
-                                .then(ids => {
-                                    ids.forEach(async id => {
-                                        let res = await this._fetch(`/mail/${id}/`);
-                                        // eslint-disable-next-line no-console
-                                        console.log(res);
-                                        this.mails.set(id, new MailItem(res) );
-                                    });
+                                .then(async ids => {
+                                    for (let i = 0; i < ids.length; i++) {
+                                        let res = await this._fetch(`/mail/${ids[i]}/`);
+                                        this.mails.set(ids[i], new MailItem(res) );
+                                    }
 
-                                    resolve(this.mails);
+                                    resolve([ ...this.mails.values() ]);
                                 })
                                 .catch(reject);
                         } else {
-                            resolve(this.mails);
+                            resolve([ ...this.mails.values() ]);
                         }
                     });
                 },

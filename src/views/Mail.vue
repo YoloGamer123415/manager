@@ -1,29 +1,23 @@
 <template>
     <div id="Mail">
-        <MailSide ref="mail-side" :unread="totalUnread">
-            <MailItem
-                id="hahaidk"
-                subject="Haha test"
-                short="Haha idk man"
-                :received="new Date()"
-                :from="{
-                    name: 'Test',
-                    mail: 'Test@example.com'
-                }"
-            />
+        <div class="side-view">
+            <MailSide ref="mail-side" :unread="totalUnread">
+                <MailItem
+                    v-for="mail in mails"
+                    :key="mail.id"
+                    :id="mail.id"
+                    :subject="mail.subject"
+                    :received="mail.received"
+                    :from="mail.from"
+                    :preview="mail.message.preview"
+                    :files="mail.message.files"
+                />
+            </MailSide>
+        </div>
 
-            <MailItem
-                id="help"
-                subject="Haha test 2"
-                short="Haha idk man 2"
-                :received="new Date()"
-                :from="{
-                    mail: 'NogeenTest@example.com'
-                }"
-            />
-        </MailSide>
-
-        <MailView />
+        <div class="view-big">
+            <MailView />
+        </div>
     </div>
 </template>
 
@@ -37,13 +31,29 @@ export default {
     components: {MailView,MailSide,MailItem},
     data() {
         return {
-            totalUnread: 2
+            mails: [],
+            totalUnread: 0
         }
     },
-    created() {
-        // eslint-disable-next-line no-console
-        console.log('yeet');
-        this.$mail.getUnreadMails();
+    async created() {
+        try {
+            // eslint-disable-next-line no-console
+            console.time('mail');
+            let res = await this.$mail.getUnreadMails();
+
+            // eslint-disable-next-line no-console
+            console.timeEnd('mail');
+            this.mails = res;
+            this.totalUnread = res.length;
+        } catch (e) {
+            //eslint-disable-next-line no-console
+            console.warn(e);
+
+            this.$notifications.newNotification({
+                type: 'error',
+                key: 'unknown'
+            });
+        }
     }
 }
 </script>
@@ -52,7 +62,19 @@ export default {
 div#Mail {
     display: grid;
     width: calc(100% - 2 * 1em);
-    grid-template-columns: calc(100% / 3) calc(100% / 3 * 2);
+    grid-template:
+        'side view' 100%
+        / calc(100% / 3) calc(100% / 3 * 2);
     gap: 1em;
+
+    div.side-view {
+        grid-area: side;
+        overflow-y: auto;
+    }
+
+    div.view-big {
+        grid-area: view;
+        overflow-y: auto;
+    }
 }
 </style>
