@@ -105,3 +105,6 @@ dist
 
 # some files
 yarn.lock
+
+# vscode folder
+.vscode/
