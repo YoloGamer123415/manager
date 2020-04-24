@@ -175,6 +175,17 @@ export default {
                             resolve([ ...this.calendars.values() ]);
                         }
                     });
+                },
+
+                getBusy(startDate) {
+                    return new Promise((resolve, reject) => {
+                        let uri = startDate ? `/busy/${startDate}/` : '/busy/';
+                        this._fetch(uri)
+                            .then(res => {
+                                resolve(res.hours);
+                            })
+                            .catch(reject);
+                    });
                 }
             }
         });

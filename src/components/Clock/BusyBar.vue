@@ -15,28 +15,31 @@
 export default {
     name: "BusyBar",
     props: {
-        hours: Number,
+        busy: Number,
         isToday: Boolean
     },
+    watch: {
+        busy() {
+            this.setHours(this.busy);
+        }
+    },
     methods: {
-        setHours(hours) {
-            if (hours < 0)
-                hours = 0;
-            else if (hours > 24)
-                hours = 24;
+        setHours(busy) {
+            if (busy < 0)
+                busy = 0;
+            else if (busy > 24)
+                busy = 24;
             
-            this.height = (hours / 24) * 100;
+            this.height = (busy / 24) * 100;
         }
     },
     data() {
         return {
-            height: ((this.hours || 0) / 24) * 100
+            height: ((this.busy || 0) / 24) * 100
         }
     },
-    mounted() {
-        setInterval(() => {
-            this.setHours(Math.floor(Math.random() * 24 + 1));
-        }, 1000);
+    created() {
+        this.setHours(this.busy);
     }
 }
 </script>

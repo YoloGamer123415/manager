@@ -17,17 +17,25 @@
             })" />
         </div>
         
-        <div class="busy-bars" ref="busyBars" />
+        <!-- <div class="busy-bars" ref="busyBars" /> -->
+
+        <div class="busy-bars">
+            <BusyBarWrapper
+                v-for="n in 7"
+                :key="n"
+                :n="n - 1" 
+            />
+        </div>
     </div>
 </template>
 
 <script>
-import Vue from "vue";
+import EventBus from "@/EventBus";
 import BusyBarWrapper from "./BusyBarWrapper";
-import i18n from "@/plugins/i18n";
 
 export default {
     name: "Clock",
+    components: {BusyBarWrapper},
     data() {
         return {
             time: {
@@ -41,38 +49,24 @@ export default {
             }
         }
     },
-    mounted() {
+    created() {
         setInterval(() => {
             this.formatTime(new Date());
         }, 500);
 
-        const ELEMENT = Vue.extend(BusyBarWrapper);
-        const DAYS = [
-            'days.sunday.letter',
-            'days.monday.letter',
-            'days.tuesday.letter',
-            'days.wednesday.letter',
-            'days.thursday.letter',
-            'days.friday.letter',
-            'days.saturday.letter'
-        ];
-        const busyBars = this.$refs.busyBars;
-        const today = new Date().getDay();
+        this.$agenda.getBusy()
+            .then(hours => {
+                EventBus.emit('busy', hours);
+            })
+            .catch(err => {
+                //eslint-disable-next-line no-console
+                console.warn(err);
 
-        for (let i = 0; i < 7; i++) {
-            let day = (today + i) % 7;
-
-            let instance = new ELEMENT({
-                i18n,
-                propsData: {
-                    hours: 24,
-                    isToday: i === 0,
-                    day: DAYS[day]
-                }
+                this.$notifications.newNotification({
+                    type: 'error',
+                    key: 'unknown'
+                });
             });
-            instance.$mount();
-            busyBars.appendChild(instance.$el);
-        }
     },
     methods: {
         /**
