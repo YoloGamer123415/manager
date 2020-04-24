@@ -40,16 +40,13 @@ export default {
                  *
                  * @param {AxiosRequestConfig} options
                  * @param {string} url
-                 * @param {string} requestType
+                 * @param {string} [requestType='get']
                  * @return {AxiosRequestConfig}
                  */
                 parseOptions (options, url, requestType = 'get') {
                     let temp = options;
 
                     temp.validateStatus = false;
-
-                    if (!temp)
-                        temp = {};
 
                     if (!temp.headers)
                         temp.headers = {};
