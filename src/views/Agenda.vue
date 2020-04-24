@@ -139,7 +139,7 @@ export default {
     },
     async created() {
         // TODO: [API] verander de kleuren. Backcolor van calendar en backcolor van appointment.
-        const TODAY = new Date();
+        const TODAY = new Date( decodeURIComponent(this.$route.params.date) );
         const DAYS = ['today', 'tomorrow', 'dayAfterTomorrow'];
 
         try {

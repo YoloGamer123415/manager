@@ -66,7 +66,7 @@ export default {
             },
             {
                 key: 'a',
-                route: `/agenda/?day=${encodeURIComponent( (new Date).toISOString() )}/`
+                route: `/agenda/${encodeURIComponent( (new Date).toISOString() )}/`
             },
             {
                 key: 'm',

@@ -37,6 +37,10 @@ const routes = [
     },
     {
         path: '/agenda/',
+        redirect: `/agenda/${encodeURIComponent( (new Date).toISOString() )}/`
+    },
+    {
+        path: '/agenda/:date/',
         name: 'agenda',
         component: Agenda,
         meta: {

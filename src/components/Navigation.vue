@@ -10,7 +10,7 @@
             </div>
         </router-link>
     
-        <router-link :to="`/agenda/?day=${encodeURIComponent( (new Date).toISOString() )}`" class="link normal agenda">
+        <router-link :to="`/agenda/${encodeURIComponent( (new Date).toISOString() )}/`" class="link normal agenda">
             <div class="icon">
                 <font-awesome-icon icon="calendar-alt" />
             </div>
