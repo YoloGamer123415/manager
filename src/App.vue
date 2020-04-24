@@ -59,28 +59,22 @@ export default {
         });
     },
     mounted() {
-        const keystrokes = [
-            {
-                key: 'h',
-                route: '/home/'
-            },
-            {
-                key: 'a',
-                route: `/agenda/${encodeURIComponent( (new Date).toISOString() )}/`
-            },
-            {
-                key: 'm',
-                route: '/mail/'
-            },
-            {
-                key: 't',
-                route: '/tasks/'
-            },
-            {
-                key: 's',
-                route: '/settings/'
-            }
-        ];
+        const keystrokes = [{
+            key: 'h',
+            route: '/home/'
+        }, {
+            key: 'a',
+            route: `/agenda/${encodeURIComponent( (new Date).toISOString() )}/`
+        }, {
+            key: 'm',
+            route: '/mail/'
+        }, {
+            key: 't',
+            route: '/tasks/'
+        }, {
+            key: 's',
+            route: '/settings/'
+        }];
         
         keystrokes.forEach(keystroke => {
             this.$keystrokes.register(keystroke.key, () => {
@@ -95,7 +89,6 @@ export default {
 <style lang="scss">
 @import "assets/style/mixins";
 
-//                                                            |Poppins
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 $gap: 1em;
