@@ -42,21 +42,23 @@ export default {
             },
             created() {
                 document.onkeydown = e => {
-                    this.pressed.push(e.key);
-
-                    let totalPresses = this.pressed.join('');
-
-                    if (this.patterns.has(totalPresses))
-                        ( this.patterns.get(totalPresses) )();
-
-                    if (this.clear) {
-                        clearInterval(this.clear);
-                        this.clear = null;
+                    if (e.target === document.body) {
+                        this.pressed.push(e.key);
+    
+                        let totalPresses = this.pressed.join('');
+    
+                        if (this.patterns.has(totalPresses))
+                            ( this.patterns.get(totalPresses) )();
+    
+                        if (this.clear) {
+                            clearInterval(this.clear);
+                            this.clear = null;
+                        }
+    
+                        this.clear = setTimeout(() => {
+                            this.clearPresses();
+                        }, this.delay)
                     }
-
-                    this.clear = setTimeout(() => {
-                        this.clearPresses();
-                    }, this.delay)
                 }
             }
         });
