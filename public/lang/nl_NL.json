@@ -108,6 +108,17 @@
     "time": {
         "day": "{day} {dayN} {month} {year}",
         "time": "{hours}:{minutes}:{seconds}",
+        "calendar": {
+            "day":"{day} {dayN} {month}",
+            "current": {
+                "hours": "Nog {hours} uur en {minutes} minuten tot {appointment} voorbij is.",
+                "minutes": "Nog {minutes} minuten tot {appointment} voorbij is."
+            },
+            "next": {
+                "hours": "Over {hours} uur en {minutes} minuten:",
+                "minutes": "Over {minutes} minuten:"
+            }
+        },
         "mail": {
             "short": "{dayN} {month}",
             "full": ""
@@ -129,6 +140,9 @@
             "title": "Databesparing staat {0}.",
             "text": "Dit betekent dat we niet het laatste nieuws zullen verzamelen.",
             "on": "aan"
+        },
+        "calendar": {
+            "no-next": "Er zijn geen nieuwe afspraken. Voor vandaag ben je klaar!"
         },
         "mail": {
             "from": "van",

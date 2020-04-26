@@ -108,7 +108,18 @@
     "time": {
         "day": "{day} {month} {dayN}, {year}",
         "time": "{hours}:{minutes}:{seconds}",
-        "calendar": "{hours}:{minutes}",
+        "calendar": {
+            "time": "{hours}:{minutes}",
+            "day": "{day} {month} {dayN}",
+            "current": {
+                "hours": "Still {hours} hours and {minutes} minutes until {appointment} is over.",
+                "minutes": "Another {minutes} minutes until {appointment} is over."
+            },
+            "next": {
+                "hours": "In {hours} hours and {minutes} minutes:",
+                "minutes": "In {minutes} minutes:"
+            }
+        },
         "mail": {
             "short": "{month} {dayN}",
             "full": ""
@@ -130,6 +141,9 @@
             "title": "Data saving is {0}.",
             "text": "This means that we won't collect the latest news.",
             "on": "on"
+        },
+        "calendar": {
+            "no-next": "There are no new appointments. You're done for today!"
         },
         "mail": {
             "from": "from",

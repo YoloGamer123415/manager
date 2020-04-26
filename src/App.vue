@@ -9,8 +9,8 @@
         <Clock class="clock" />
 
         <div class="side">
-            width: {{ width }}.<br>
-            height: {{ height }}.
+            <SideAppointment v-if="$route.name !== 'agenda'" />
+            <DaySelector v-else />
         </div>
         
         <Navigation class="navigation" />
@@ -24,17 +24,21 @@
 <script>
 import "@/assets/style/colors.scss";
 import Navigation from "@/components/Navigation";
-import Clock from "./components/Clock/index";
-import Notifications from "@/components/Notifications/index";
+import Clock from "@/components/Clock";
+import SideAppointment from "@/components/SideAppointment";
+import DaySelector from "@/components/DaySelector";
+import Notifications from "@/components/Notifications";
 import NewButton from "@/components/NewButton";
 
 export default {
     name: 'app',
     components: {
-        NewButton,
-        Notifications,
+        Navigation,
         Clock,
-        Navigation
+        SideAppointment,
+        DaySelector,
+        Notifications,
+        NewButton,
     },
     data() {
         // TODO: remove later
@@ -115,12 +119,6 @@ $gap: 1em;
     padding: 0;
 }
 
-//@for $i from 1 through 6 {
-//    h#{$i} {
-//        font-family: 'Poppins', sans-serif;
-//    }
-//}
-
 html, body {
     width: 100vw;
     height: 100vh;
@@ -189,8 +187,6 @@ html, body {
     
     .side {
         grid-area: side;
-        
-        background-color: green;
     }
     
     .navigation {

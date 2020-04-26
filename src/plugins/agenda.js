@@ -81,6 +81,22 @@ class Calendar {
     }
 }
 
+/**
+ * @param {Number} num
+ * @param {Number} min
+ * @param {Number} max
+ * @returns {Number}
+ */
+const minmax = (num, min, max) => {
+    if (num < min)
+        return min;
+    else
+    if (num > max)
+        return max;
+    else
+        return num;
+}
+
 export default {
     install(Vue) {
         const Agenda = new Vue({
@@ -91,9 +107,9 @@ export default {
                      */
                     lastTimeFetched: 0,
                     /**
-                     * @type {Calendar[]}
+                     * @type {Map<String, Calendar>}
                      */
-                    calendars: [],
+                    calendars: new Map(),
                     /**
                      * @type {Number}
                      * @todo Check if data saving is toggled. If so, make delay longer (10 mins or something along those lines).
@@ -143,7 +159,6 @@ export default {
                  */
                 getAppointments(startDate, endDate) {
                     return new Promise((resolve, reject) => {
-                        // TODO: al deze if statements werken vlgns mij ook niet.
                         // TODO: moet een rewrite met check of de dagen al bestaan en het anders opslaan (per dag)
                         if ( Date.now() > Math.ceil(this.lastTimeFetched + this.refreshRate) ) {
                             this._getCalendars()
@@ -168,6 +183,8 @@ export default {
                                         }
                                     }
 
+                                    // TODO: voeg dit weer toe, maar het vereist een rewrite :(
+                                    // this.lastTimeFetched = Date.now();
                                     resolve([ ...this.calendars.values() ]);
                                 })
                                 .catch(reject);
@@ -186,6 +203,76 @@ export default {
                             })
                             .catch(reject);
                     });
+                },
+
+                /**
+                 * Get the current appointment in calendar {@link calendarId}.
+                 *
+                 * @param {String} calendarId
+                 * @returns {Appointment}
+                 */
+                async getCurrent(calendarId) {
+                    let now = Date.now();
+
+                    if (this.calendars.size <= 0)
+                        await this.getAppointments();
+
+                    /**
+                     * @type {Calendar[]}
+                     */
+                    let calendars = [ ...this.calendars.values() ].filter(c => c.id === calendarId);
+
+                    for (let i = 0; i < calendars.length; i++) {
+                        let calendar = calendars[i];
+
+                        for (let j = 0; j < calendar.appointments.length; j++) {
+                            let appointment = calendar.appointments[j];
+                            /**
+                             * @type {Date}
+                             */
+                            let startDate = appointment.time.start;
+
+                            if (startDate.getTime() >= now)
+                                return calendar.appointments[ minmax(j - 1, 0, Infinity) ];
+                        }
+                    }
+
+                    return null;
+                },
+
+                /**
+                 * Get the next appointment in calendar {@link calendarId}.
+                 *
+                 * @param {String} calendarId
+                 * @returns {Appointment}
+                 */
+                async getNext(calendarId) {
+                    let now = Date.now();
+
+                    if (this.calendars.size <= 0)
+                        await this.getAppointments();
+
+                    /**
+                     * @type {Calendar[]}
+                     */
+                    let calendars = [ ...this.calendars.values() ].filter(c => c.id === calendarId);
+
+                    for (let i = 0; i < calendars.length; i++) {
+                        let calendar = calendars[i];
+
+                        for (let j = 0; j < calendar.appointments.length; j++) {
+                            let appointment = calendar.appointments[j];
+                            /**
+                             * @type {Date}
+                             */
+                            let startDate = appointment.time.start;
+
+                            if (startDate.getTime() >= now)
+                                return appointment;
+                        }
+                    }
+
+                    return null;
                 }
             }
         });
