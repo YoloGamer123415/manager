@@ -2,8 +2,8 @@
 
 <template>
     <div
-        class="Appointment"
         ref="appointment"
+        class="Appointment"
         :style="{
             '--Appointment-color-foreground': color.foreground || color.background,
             '--Appointment-color-background': color.background,
@@ -44,12 +44,13 @@
 </template>
 
 <script>
-import EventBus from "@/EventBus";
-
 export default {
     name: 'Appointment',
     props: {
-        title: String,
+        title: {
+            type: String,
+            required: true
+        },
         description: {
             type: String,
             required: false
@@ -65,7 +66,7 @@ export default {
         time: {
             start: Date,
             end: Date
-        }
+        },
     },
     data() {
         return {
@@ -74,7 +75,7 @@ export default {
     },
     methods: {
         getTimeShort() {
-            return this.$t('time.calendar', {
+            return this.$t('time.calendar.time', {
                 hours: this.time.start.getHours().toString().padStart(2, '0'),
                 minutes: this.time.start.getMinutes().toString().padStart(2, '0')
             });
@@ -83,14 +84,14 @@ export default {
         getTimeStartEnd() {
             let res = '';
 
-            res += this.$t('time.calendar', {
+            res += this.$t('time.calendar.time', {
                 hours: this.time.start.getHours().toString().padStart(2, '0'),
                 minutes: this.time.start.getMinutes().toString().padStart(2, '0')
             });
 
             res += ' - ';
 
-            res += this.$t('time.calendar', {
+            res += this.$t('time.calendar.time', {
                 hours: this.time.end.getHours().toString().padStart(2, '0'),
                 minutes: this.time.end.getMinutes().toString().padStart(2, '0')
             });
@@ -115,7 +116,7 @@ export default {
         },
 
         fullscreen() {
-            EventBus.emit('appointment-fullscreen', {
+            this.$emit('fullscreen', {
                 title: this.title,
                 description: this.description,
                 location: this.location,
@@ -136,6 +137,7 @@ $bar-width: .2em;
 div.Appointment {
     position: absolute;
     width: calc(100% - #{$width} - 3 * #{$padding}); // a third time because the elements get a margin left from the Column
+    // TODO: does the padding fuck with the height? Probably yes
     padding: $padding / 2 $padding;
     color: var(--current-theme-text);
     border-radius: .3em;
@@ -154,6 +156,7 @@ div.Appointment {
         height: $width;
         padding: .25em 0;
         background-color: var(--current-theme-background);
+        z-index: 1;
     }
 
     &::after {
@@ -168,7 +171,7 @@ div.Appointment {
         border-style: solid;
         border-color: var(--Appointment-color-background);
         border-radius: 100px;
-        z-index: 1;
+        z-index: 2;
     }
 
     p.title {

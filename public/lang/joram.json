@@ -88,7 +88,10 @@
     },
     "time": {
         "day": "{day} {dayN} {month} {year}",
-        "calendar": "{hours}u{minutes}",
+        "calendar": {
+            "time": "{hours}u{minutes}",
+            "day":"{day} {dayN} {month}"
+        },
         "mail": {
             "short": "{dayN} {month}"
         },

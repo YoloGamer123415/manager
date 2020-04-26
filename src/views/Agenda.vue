@@ -38,14 +38,31 @@
             </div>
         </div>
 
-        <Column class="column-1" :appointments="appointments.today" />
-        <Column class="column-2" :appointments="appointments.tomorrow" />
-        <Column class="column-3" :appointments="appointments.dayAfterTomorrow" />
+        <Column
+            class="column-1"
+            :isToday="true"
+            :dayOffset="0"
+            :appointments="appointments.today"
+            @fullscreen="fullscreen"
+        />
+        <Column
+            class="column-2"
+            :isToday="false"
+            :dayOffset="1"
+            :appointments="appointments.tomorrow"
+            @fullscreen="fullscreen"
+        />
+        <Column
+            class="column-3"
+            :isToday="false"
+            :dayOffset="2"
+            :appointments="appointments.dayAfterTomorrow"
+            @fullscreen="fullscreen"
+        />
     </div>
 </template>
 
 <script>
-import EventBus from "@/EventBus";
 import Column from "@/components/Agenda/Column";
 
 export default {
@@ -98,14 +115,14 @@ export default {
         formatTime(time) {
             let res = '';
 
-            res += this.$t('time.calendar', {
+            res += this.$t('time.calendar.time', {
                 hours: time.start.getHours().toString().padStart(2, '0'),
                 minutes: time.start.getMinutes().toString().padStart(2, '0')
             });
 
             res += ' - ';
 
-            res += this.$t('time.calendar', {
+            res += this.$t('time.calendar.time', {
                 hours: time.end.getHours().toString().padStart(2, '0'),
                 minutes: time.end.getMinutes().toString().padStart(2, '0')
             });
@@ -135,6 +152,14 @@ export default {
                     fullscreen.classList.remove('open');
                 });
             }
+        },
+
+        calcOffset() {
+            let height = window.innerHeight
+                || document.documentElement.clientHeight
+                || document.body.clientHeight
+                || 780; // a default offset of 100px
+            return height - 680;
         }
     },
     async created() {
@@ -163,8 +188,11 @@ export default {
         }
     },
     mounted() {
-        EventBus.on('appointment-fullscreen', this.fullscreen);
-        // TODO: voeg het tijdaangeef lijntje toe en scroll er naar toe
+        let d = new Date();
+        this.$refs.agenda.scrollTo({
+            left: 0,
+            top: ( ( d.getHours() * 60 + d.getMinutes() ) / 60 * this.$agenda.HOUR_HEIGHT ) - this.calcOffset()
+        });
     }
 }
 </script>
