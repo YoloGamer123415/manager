@@ -153,6 +153,7 @@ export default {
                                         }
                                     }
 
+                                    this.lastTimeFetched = Date.now();
                                     resolve([ ...this.taskLists.values() ]);
                                 })
                                 .catch(reject);

@@ -125,6 +125,7 @@ export default {
                                         this.mails.set(ids[i], new MailItem(res) );
                                     }
 
+                                    this.lastTimeFetched = Date.now();
                                     resolve([ ...this.mails.values() ]);
                                 })
                                 .catch(reject);
